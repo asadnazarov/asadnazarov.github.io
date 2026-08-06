@@ -1,0 +1,17 @@
+.env
+.env.local
+.env*.local
+credentials.json
+token.json
+.tmp/
+__pycache__/
+*.pyc
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+.vercel
+next-env.d.ts
+*.tsbuildinfo
