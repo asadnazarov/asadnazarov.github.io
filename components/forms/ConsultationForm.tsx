@@ -8,7 +8,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { consultationSchema, type ConsultationSchema } from "@/lib/validation/consultationSchema";
 import { FormField, inputClass } from "@/components/forms/FormField";
 import { Button } from "@/components/ui/Button";
-import { SOCIALS } from "@/lib/constants";
+import { SOCIALS, SUPABASE_ANON_KEY, CONSULTATION_FUNCTION_URL } from "@/lib/constants";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -34,9 +34,13 @@ export function ConsultationForm() {
   const onSubmit = async (data: ConsultationSchema) => {
     setStatus("submitting");
     try {
-      const res = await fetch("/api/consultation", {
+      const res = await fetch(CONSULTATION_FUNCTION_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+        },
         body: JSON.stringify({ ...data, locale }),
       });
 
