@@ -17,9 +17,8 @@ export function CaseStudies() {
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {t.cases.items.map((item, i) => (
-            <FadeIn key={item.number} delay={i * 0.08}>
+            <FadeIn key={item.industry} delay={i * 0.08}>
               <Card className="h-full flex flex-col">
-                <div className="font-display text-accent text-sm mb-4">{item.number}</div>
                 <div className="text-xs uppercase tracking-widest text-muted mb-3">{item.industry}</div>
                 <dl className="space-y-3 text-sm md:text-base leading-relaxed">
                   <div>

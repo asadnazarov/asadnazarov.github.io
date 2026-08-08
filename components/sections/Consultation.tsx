@@ -24,17 +24,10 @@ export function Consultation() {
             </div>
 
             <div className="space-y-4">
-              {t.consultation.outcomes.map((outcome, i) => (
+              {t.consultation.outcomes.map((outcome) => (
                 <Card key={outcome.title} className="p-5">
-                  <div className="flex gap-4">
-                    <span className="font-display text-accent text-sm shrink-0">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <div className="font-medium mb-1">{outcome.title}</div>
-                      <p className="text-sm text-muted leading-relaxed">{outcome.description}</p>
-                    </div>
-                  </div>
+                  <div className="font-medium mb-1">{outcome.title}</div>
+                  <p className="text-sm text-muted leading-relaxed">{outcome.description}</p>
                 </Card>
               ))}
             </div>
