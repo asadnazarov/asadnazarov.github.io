@@ -1,3 +1,5 @@
+import type { ReactElement } from "react";
+
 interface FlagProps {
   className?: string;
 }
@@ -15,13 +17,31 @@ export function FlagGB({ className }: FlagProps) {
 }
 
 export function FlagUS({ className }: FlagProps) {
+  const stripeH = 40 / 13;
+  const redStripeIndices = [0, 2, 4, 6, 8, 10, 12];
+  const cantonW = 26;
+  const cantonH = stripeH * 7;
+
+  const stars: ReactElement[] = [];
+  const rows = 4;
+  const cols = 5;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const offsetX = r % 2 === 0 ? 0 : cantonW / (cols * 2);
+      const cx = (cantonW / cols) * (c + 0.5) - offsetX / 2 + offsetX;
+      const cy = (cantonH / rows) * (r + 0.5);
+      stars.push(<circle key={`${r}-${c}`} cx={cx} cy={cy} r="0.9" fill="#fff" />);
+    }
+  }
+
   return (
     <svg viewBox="0 0 60 40" className={className} aria-hidden>
       <rect width="60" height="40" fill="#fff" />
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-        <rect key={i} y={(i * 40) / 13} width="60" height={40 / 13} fill="#B22234" />
+      {redStripeIndices.map((k) => (
+        <rect key={k} y={k * stripeH} width="60" height={stripeH} fill="#B22234" />
       ))}
-      <rect width="26" height="21.5" fill="#3C3B6E" />
+      <rect width={cantonW} height={cantonH} fill="#3C3B6E" />
+      {stars}
     </svg>
   );
 }
