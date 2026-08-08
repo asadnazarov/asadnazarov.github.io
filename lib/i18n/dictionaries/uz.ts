@@ -2,9 +2,9 @@ import type { Dictionary } from "@/lib/i18n/types";
 
 export const uz: Dictionary = {
   meta: {
-    title: "Asad Nazarov — AI-arxitektor | Biznesga sun'iy intellekt joriy qilish",
+    title: "Asad Nazarov — AI-agentli tizimlar muhandisi | Biznesga sun'iy intellekt joriy qilish",
     description:
-      "Biznesning xarajatlarini qisqartiradigan va foydasini oshiradigan AI-tizimlarni loyihalab, quraman. Shaxsiy konsultatsiya — hammasini o'zi yozadigan arxitektor bilan.",
+      "Arxitekturadan biznesning real ma'lumotlariga joriy qilishgacha agentli AI-tizimlar quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan. Shaxsiy konsultatsiya — hammasini o'zi yozadigan muhandis bilan.",
   },
   nav: {
     items: [
@@ -15,7 +15,7 @@ export const uz: Dictionary = {
     cta: "Bog'lanish",
   },
   hero: {
-    overline: "AI-arxitektor",
+    overline: "AI-agentli tizimlar muhandisi",
     headline: "Xodimlar sonini oshirmasdan",
     headlineAccent: "masshtablang.",
     subhead:
@@ -29,7 +29,7 @@ export const uz: Dictionary = {
     heading: "Men haqimda",
     subheading: "Asad Nazarov kim?",
     paragraphs: [
-      "Men — AI-arxitektorman: biznesni iqtisodiy jihatdan samaraliroq qiladigan tizimlarni loyihalayman va quraman — xarajatlarni qisqartiraman, jarayonlarni tezlashtiraman va foydani oshiraman. Shunchaki \"so'zda\" maslahat bermayman, o'zim kod yozaman va yechimlarni ishlab chiqarishga olib chiqaman.",
+      "Men — agentli tizimlar muhandisiman: AI-agentlarni arxitekturadan boshlab biznesingizning real ma'lumotlariga joriy qilishgacha quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan tarzda. Shunchaki qog'ozda loyihalamayman — yechimni ishlab chiqarishga o'zim olib chiqaman, u yerda alohida demo emas, balki sizning jarayonlaringiz va ma'lumotlaringiz bilan ishlaydi.",
       "Men chakana savdo, e-commerce, xizmatlar sohasi va IT kompaniyalari bilan ishlaganman — kichik kompaniyalardan tortib Markaziy Osiyo, MDH va xalqaro bozordagi o'sib borayotgan kompaniyalargacha. Har bir loyihada vazifam bitta: AI qayerda real pul yoki vaqt tejashini aniqlash va yechimni \"pilot loyiha uchun pilot\" emas, ishlab chiqarishga olib chiqish.",
     ],
     credentials: [
@@ -190,7 +190,7 @@ export const uz: Dictionary = {
     },
   },
   footer: {
-    tagline: "AI-arxitektor. Biznesga real natija beradigan sun'iy intellektni joriy qilaman.",
+    tagline: "AI-agentli tizimlar muhandisi. Vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan yechimlar quraman.",
     contactHeading: "Aloqa",
     email: "asadnazarov077@gmail.com",
     telegram: "Telegram",
