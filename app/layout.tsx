@@ -17,11 +17,11 @@ const unbounded = Unbounded({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Asad Nazarov — AI-консультант",
+  title: "Asad Nazarov — AI-архитектор",
   description:
     "Внедрение AI-агентов и автоматизации в бизнес. Персональная консультация с экспертом, который сам разрабатывает решения.",
   openGraph: {
-    title: "Asad Nazarov — AI-консультант",
+    title: "Asad Nazarov — AI-архитектор",
     description:
       "Внедрение AI-агентов и автоматизации в бизнес. Персональная консультация с экспертом, который сам разрабатывает решения.",
     url: SITE_URL,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Asad Nazarov — AI-консультант",
+    title: "Asad Nazarov — AI-архитектор",
     description:
       "Внедрение AI-агентов и автоматизации в бизнес. Персональная консультация с экспертом, который сам разрабатывает решения.",
     images: ["/og-image.jpg"],

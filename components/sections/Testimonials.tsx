@@ -21,7 +21,7 @@ export function Testimonials() {
     <section id="testimonials" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
-          <SectionHeading number={t.testimonials.number} eyebrow={t.testimonials.eyebrow} heading={t.testimonials.heading} />
+          <SectionHeading heading={t.testimonials.heading} />
         </FadeIn>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

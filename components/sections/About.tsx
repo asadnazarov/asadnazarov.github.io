@@ -11,7 +11,7 @@ export function About() {
     <section id="about" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
-          <SectionHeading number={t.about.number} eyebrow={t.about.eyebrow} heading={t.about.heading} />
+          <SectionHeading heading={t.about.heading} />
         </FadeIn>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr]">

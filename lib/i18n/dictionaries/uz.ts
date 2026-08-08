@@ -2,7 +2,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 
 export const uz: Dictionary = {
   meta: {
-    title: "Asad Nazarov — AI-konsultant | Biznesga sun'iy intellekt joriy qilish",
+    title: "Asad Nazarov — AI-arxitektor | Biznesga sun'iy intellekt joriy qilish",
     description:
       "Kompaniyalarga natija beradigan AI-agentlar va avtomatlashtirish joriy qilishda yordam beraman. Shaxsiy konsultatsiya — hammasini o'zi yozadigan mutaxassis bilan.",
   },
@@ -15,7 +15,7 @@ export const uz: Dictionary = {
     cta: "Konsultatsiya",
   },
   hero: {
-    overline: "AI-konsultant",
+    overline: "AI-arxitektor",
     headline: "Biznesga sun'iy intellektni",
     headlineAccent: "real natija beradigan tarzda joriy qilaman.",
     subhead:
@@ -29,11 +29,9 @@ export const uz: Dictionary = {
     stat3Label: "soat oyiga mijozlarda tejalgan vaqt",
   },
   about: {
-    number: "01",
-    eyebrow: "Men haqimda",
     heading: "Men kimman va nega menga AI joriy qilishni ishonish mumkin",
     paragraphs: [
-      "Men — dasturchi va AI-konsultantman, o'zim loyihalashtiraman, kod yozaman va joriy qilaman, shunchaki \"so'zda\" maslahat bermayman. So'nggi bir necha yil davomida dasturlash va sun'iy intellekt chorrahasida ishlayapman: AI-agentlar quraman, ichki jarayonlarni avtomatlashtiraman va biznesga AI'dan investorlar uchun hisobot emas, real foyda olishga yordam beraman.",
+      "Men — dasturchi va AI-arxitektorman, o'zim loyihalashtiraman, kod yozaman va joriy qilaman, shunchaki \"so'zda\" maslahat bermayman. So'nggi bir necha yil davomida dasturlash va sun'iy intellekt chorrahasida ishlayapman: AI-agentlar quraman, ichki jarayonlarni avtomatlashtiraman va biznesga AI'dan investorlar uchun hisobot emas, real foyda olishga yordam beraman.",
       "Men chakana savdo, e-commerce, xizmatlar sohasi va IT kompaniyalari bilan ishlaganman — kichik kompaniyalardan tortib Markaziy Osiyo va MDH mintaqasidagi o'sib borayotgan kompaniyalargacha. Har bir loyihada vazifam bitta: AI qayerda real pul yoki vaqt tejashini aniqlash va yechimni \"pilot loyiha uchun pilot\" emas, ishlab chiqarishga olib chiqish.",
       "Men vositachi agentlik orqali ishlamayman — siz men bilan bevosita muloqot qilasiz, va taklif qiladigan yechimlarni o'zim amalga oshiraman.",
     ],
@@ -45,8 +43,6 @@ export const uz: Dictionary = {
     ],
   },
   cases: {
-    number: "02",
-    eyebrow: "Keyslar",
     heading: "Men allaqachon nima joriy qildim",
     subhead: "Mijozlar duch keladigan real vazifalar — va AI ularni amalda qanday hal qiladi.",
     items: [
@@ -86,8 +82,6 @@ export const uz: Dictionary = {
     },
   },
   testimonials: {
-    number: "03",
-    eyebrow: "Fikrlar",
     heading: "Mijozlar nima deydi",
     items: [
       {
@@ -111,8 +105,6 @@ export const uz: Dictionary = {
     ],
   },
   consultation: {
-    number: "04",
-    eyebrow: "Konsultatsiya",
     heading: "Shaxsiy konsultatsiya — $100",
     subhead:
       "Bu \"qo'ng'iroq uchun qo'ng'iroq\" emas. Bir suhbatda vazifangizni tahlil qilamiz va aynan sizning biznesingiz uchun maksimal natija beradigan yechimni aniqlaymiz.",
@@ -179,7 +171,7 @@ export const uz: Dictionary = {
     },
   },
   footer: {
-    tagline: "AI-konsultant. Biznesga real natija beradigan sun'iy intellektni joriy qilaman.",
+    tagline: "AI-arxitektor. Biznesga real natija beradigan sun'iy intellektni joriy qilaman.",
     contactHeading: "Aloqa",
     email: "hello@asadnazarov.ai",
     telegram: "@asadnazarov",

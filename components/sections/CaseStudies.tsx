@@ -12,12 +12,7 @@ export function CaseStudies() {
     <section id="cases" className="py-24 md:py-32 bg-surface/30">
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
-          <SectionHeading
-            number={t.cases.number}
-            eyebrow={t.cases.eyebrow}
-            heading={t.cases.heading}
-            subhead={t.cases.subhead}
-          />
+          <SectionHeading heading={t.cases.heading} subhead={t.cases.subhead} />
         </FadeIn>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">

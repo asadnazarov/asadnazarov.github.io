@@ -13,12 +13,7 @@ export function Consultation() {
     <section id="consultation" className="py-24 md:py-32 bg-surface/30">
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
-          <SectionHeading
-            number={t.consultation.number}
-            eyebrow={t.consultation.eyebrow}
-            heading={t.consultation.heading}
-            subhead={t.consultation.subhead}
-          />
+          <SectionHeading heading={t.consultation.heading} subhead={t.consultation.subhead} />
         </FadeIn>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2">

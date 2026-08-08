@@ -23,15 +23,11 @@ export interface Dictionary {
     stat3Label: string;
   };
   about: {
-    number: string;
-    eyebrow: string;
     heading: string;
     paragraphs: string[];
     credentials: string[];
   };
   cases: {
-    number: string;
-    eyebrow: string;
     heading: string;
     subhead: string;
     items: CaseStudy[];
@@ -42,14 +38,10 @@ export interface Dictionary {
     };
   };
   testimonials: {
-    number: string;
-    eyebrow: string;
     heading: string;
     items: Testimonial[];
   };
   consultation: {
-    number: string;
-    eyebrow: string;
     heading: string;
     subhead: string;
     price: string;
