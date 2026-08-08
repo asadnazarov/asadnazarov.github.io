@@ -2,13 +2,20 @@
 
 import { useEffect, useRef } from "react";
 
-interface Dot {
+interface Sphere {
   x: number;
   y: number;
-  baseY: number;
-  phase: number;
+  vx: number;
+  vy: number;
   radius: number;
 }
+
+const SETTLE_DURATION = 1600; // ms of "poured out, falling and bouncing" before zero-gravity float
+const GRAVITY = 0.22;
+const WALL_DAMPING = 0.72;
+const COLLISION_DAMPING = 0.85;
+const FLOAT_JITTER = 0.012;
+const FLOAT_MAX_SPEED = 0.35;
 
 export function DotField({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,13 +27,29 @@ export function DotField({ className }: { className?: string }) {
     if (!ctx) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     let width = 0;
     let height = 0;
-    let dots: Dot[] = [];
+    let spheres: Sphere[] = [];
     let animationFrame = 0;
+    let startTime = 0;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function makeSpheres() {
+      const area = width * height;
+      const count = Math.max(24, Math.min(70, Math.round(area / 9000)));
+      const list: Sphere[] = [];
+      for (let i = 0; i < count; i++) {
+        list.push({
+          x: Math.random() * width,
+          y: -Math.random() * height, // start above the visible area, like poured from a bag
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: Math.random() * 0.5,
+          radius: 2 + Math.random() * 2.5,
+        });
+      }
+      return list;
+    }
 
     function resize() {
       const el = canvas!;
@@ -34,48 +57,131 @@ export function DotField({ className }: { className?: string }) {
       height = el.clientHeight;
       el.width = width * dpr;
       el.height = height * dpr;
+      ctx!.setTransform(1, 0, 0, 1, 0, 0);
       ctx!.scale(dpr, dpr);
+      spheres = makeSpheres();
+    }
 
-      const spacing = width < 640 ? 42 : 34;
-      const cols = Math.ceil(width / spacing) + 1;
-      const rows = Math.ceil(height / spacing) + 1;
-      dots = [];
-      for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-          dots.push({
-            x: i * spacing,
-            y: j * spacing,
-            baseY: j * spacing,
-            phase: Math.random() * Math.PI * 2,
-            radius: 1 + Math.random() * 0.6,
-          });
+    function resolveCollisions() {
+      for (let i = 0; i < spheres.length; i++) {
+        for (let j = i + 1; j < spheres.length; j++) {
+          const a = spheres[i];
+          const b = spheres[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+          const minDist = a.radius + b.radius;
+          if (dist < minDist) {
+            const overlap = (minDist - dist) / 2;
+            const nx = dx / dist;
+            const ny = dy / dist;
+            a.x -= nx * overlap;
+            a.y -= ny * overlap;
+            b.x += nx * overlap;
+            b.y += ny * overlap;
+
+            const avx = a.vx;
+            const avy = a.vy;
+            a.vx = b.vx * COLLISION_DAMPING;
+            a.vy = b.vy * COLLISION_DAMPING;
+            b.vx = avx * COLLISION_DAMPING;
+            b.vy = avy * COLLISION_DAMPING;
+          }
         }
       }
     }
 
-    function draw(time: number) {
-      ctx!.clearRect(0, 0, width, height);
-      for (const dot of dots) {
-        const offset = reduceMotion ? 0 : Math.sin(time / 2200 + dot.phase) * 5;
-        const y = dot.baseY + offset;
-        const opacity = reduceMotion ? 0.18 : 0.12 + 0.1 * Math.sin(time / 2200 + dot.phase);
-        ctx!.beginPath();
-        ctx!.arc(dot.x, y, dot.radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(47, 123, 246, ${opacity})`;
-        ctx!.fill();
+    function step(elapsed: number) {
+      const falling = elapsed < SETTLE_DURATION;
+      const gravity = falling ? GRAVITY : 0;
+
+      for (const s of spheres) {
+        if (falling) {
+          s.vy += gravity;
+        } else {
+          // gentle brownian drift so they never fully stop — "floating with no gravity"
+          s.vx += (Math.random() - 0.5) * FLOAT_JITTER;
+          s.vy += (Math.random() - 0.5) * FLOAT_JITTER;
+          const speed = Math.sqrt(s.vx * s.vx + s.vy * s.vy);
+          if (speed > FLOAT_MAX_SPEED) {
+            s.vx = (s.vx / speed) * FLOAT_MAX_SPEED;
+            s.vy = (s.vy / speed) * FLOAT_MAX_SPEED;
+          }
+        }
+
+        s.x += s.vx;
+        s.y += s.vy;
+
+        if (s.x - s.radius < 0) {
+          s.x = s.radius;
+          s.vx = Math.abs(s.vx) * WALL_DAMPING;
+        } else if (s.x + s.radius > width) {
+          s.x = width - s.radius;
+          s.vx = -Math.abs(s.vx) * WALL_DAMPING;
+        }
+
+        if (s.y + s.radius > height) {
+          s.y = height - s.radius;
+          s.vy = -Math.abs(s.vy) * WALL_DAMPING;
+        } else if (s.y - s.radius < 0 && !falling) {
+          s.y = s.radius;
+          s.vy = Math.abs(s.vy) * WALL_DAMPING;
+        }
       }
-      if (!reduceMotion) {
-        animationFrame = requestAnimationFrame(draw);
+
+      resolveCollisions();
+    }
+
+    function render() {
+      ctx!.clearRect(0, 0, width, height);
+      for (const s of spheres) {
+        const gradient = ctx!.createRadialGradient(
+          s.x - s.radius * 0.35,
+          s.y - s.radius * 0.35,
+          0,
+          s.x,
+          s.y,
+          s.radius
+        );
+        gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+        gradient.addColorStop(0.45, "rgba(191, 219, 254, 1)");
+        gradient.addColorStop(1, "rgba(59, 130, 246, 1)");
+
+        ctx!.save();
+        ctx!.shadowColor = "rgba(37, 99, 235, 0.45)";
+        ctx!.shadowBlur = s.radius * 3;
+        ctx!.beginPath();
+        ctx!.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx!.fillStyle = gradient;
+        ctx!.fill();
+        ctx!.restore();
+
+        ctx!.lineWidth = 1;
+        ctx!.strokeStyle = "rgba(37, 99, 235, 0.7)";
+        ctx!.stroke();
       }
     }
 
+    function loop(time: number) {
+      if (!startTime) startTime = time;
+      step(time - startTime);
+      render();
+      animationFrame = requestAnimationFrame(loop);
+    }
+
     resize();
-    draw(0);
+
+    if (reduceMotion) {
+      // Render a single settled-looking frame, no ongoing animation or physics.
+      render();
+    } else {
+      animationFrame = requestAnimationFrame(loop);
+    }
 
     const onResize = () => {
-      ctx!.setTransform(1, 0, 0, 1, 0, 0);
       resize();
-      if (reduceMotion) draw(0);
+      startTime = 0;
+      if (reduceMotion) render();
     };
     window.addEventListener("resize", onResize);
 
@@ -90,7 +196,7 @@ export function DotField({ className }: { className?: string }) {
       ref={canvasRef}
       aria-hidden
       className={className}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", pointerEvents: "none" }}
     />
   );
 }

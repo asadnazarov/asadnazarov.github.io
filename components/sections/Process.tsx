@@ -20,7 +20,7 @@ export function Process() {
   const { t } = useLanguage();
 
   return (
-    <section id="process" className="relative py-24 md:py-32 bg-background-soft overflow-hidden">
+    <section id="process" className="relative z-0 py-24 md:py-32 bg-background-soft overflow-hidden">
       <DotField className="absolute inset-0 -z-10 opacity-70" />
 
       <div className="relative mx-auto max-w-6xl px-6">
