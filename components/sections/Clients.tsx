@@ -26,10 +26,10 @@ const LOOP = [...CLIENTS, ...CLIENTS];
 
 export function Clients() {
   return (
-    <section className="py-16 border-t border-b border-surface-border overflow-hidden">
-      <div className="marquee-track flex w-max items-start gap-10 px-6">
+    <section className="py-16 overflow-hidden">
+      <div className="marquee-track flex w-max items-start gap-20 px-6">
         {LOOP.map((client, i) => (
-          <div key={`${client.name}-${i}`} className="flex w-20 shrink-0 flex-col items-center gap-2.5">
+          <div key={`${client.name}-${i}`} className="flex w-28 shrink-0 flex-col items-center gap-2.5">
             <div className="h-20 w-20 overflow-hidden rounded-full border border-surface-border shadow-[var(--surface-shadow)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={client.src} alt={client.name} className="h-full w-full object-cover" />
