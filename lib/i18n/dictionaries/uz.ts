@@ -82,20 +82,20 @@ export const uz: Dictionary = {
     items: [
       {
         quote:
-          "Asad juda mehnatkash va aloqada juda yaxshi. U men xohlagandek ijtimoiy tarmoqlarga post qo'yish avtomatlashtirishni sozlab berdi. Asad bilan yana ishlashni xohlayman.",
+          "Asad works very hard and has great communication. He setup a social media posting automation for me exactly how i envisioned it. I will work with Asad again.",
         name: "Spencer Dean",
         role: "Egasi, Enjen Digital (AQSH)",
       },
       {
         quote:
-          "Ajoyib — Asad loyiham tugaguncha kechayu kunduz ishladi. U sotuv platformalarini, email va WhatsApp'ni to'liq avtomatik javob tizimiga birlashtirdi. Tez javoblar, ajoyib aloqa, ajoyib qiymat — kafolat beraman, bu narxga shunday katta ishni qila oladigan odamni topa olmaysiz.",
+          "Amazing, Asad worked day and night until my project was completed. He fully intergrated sales platforms, email and whattsapp into an automated reply system. Quick replies and great communication, amazing value - I guarantee you wont find someone able to do such a big job for his price offer.",
         name: "Tom Pergam",
         role: "Asoschisi, Refind Commerce va Easy Tag (Buyuk Britaniya)",
       },
       {
-        quote: "Asadbek gap yo'q — baraka toping. Man roziman, juda tez hal qilib berdingiz hamma o'zgarishlarni, rahmat.",
+        quote: "Asadbek gap yoq - baraka toping. Man roziman, juda tez xal qlib berdingiz hamma ozgarishlani, rahmat.",
         name: "Elmurod Amonov",
-        role: "Rahbari, Donzar",
+        role: "Rahbari, Donzar (O'zbekiston)",
       },
     ],
   },

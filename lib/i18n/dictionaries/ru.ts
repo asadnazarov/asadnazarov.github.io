@@ -82,21 +82,20 @@ export const ru: Dictionary = {
     items: [
       {
         quote:
-          "Асад очень усердно работает и отлично держит связь. Настроил автоматизацию постинга в соцсетях именно так, как я это себе представлял. Обязательно буду работать с Асадом снова.",
+          "Asad works very hard and has great communication. He setup a social media posting automation for me exactly how i envisioned it. I will work with Asad again.",
         name: "Spencer Dean",
         role: "Владелец, Enjen Digital (США)",
       },
       {
         quote:
-          "Потрясающе — Асад работал день и ночь, пока проект не был завершён. Он полностью интегрировал платформы продаж, email и WhatsApp в единую систему автоматических ответов. Быстрые ответы, отличная связь, невероятная ценность за деньги — гарантирую, вы не найдёте того, кто сделает такой большой объём работы за эту цену.",
+          "Amazing, Asad worked day and night until my project was completed. He fully intergrated sales platforms, email and whattsapp into an automated reply system. Quick replies and great communication, amazing value - I guarantee you wont find someone able to do such a big job for his price offer.",
         name: "Tom Pergam",
         role: "Основатель, Refind Commerce и Easy Tag (Великобритания)",
       },
       {
-        quote:
-          "Асадбек, слов нет — красавчик. Я доволен, очень быстро внёс все изменения, спасибо.",
+        quote: "Asadbek gap yoq - baraka toping. Man roziman, juda tez xal qlib berdingiz hamma ozgarishlani, rahmat.",
         name: "Элмурод Амонов",
-        role: "Руководитель, Donzar",
+        role: "Руководитель, Donzar (Узбекистан)",
       },
     ],
   },
