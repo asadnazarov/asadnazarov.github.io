@@ -63,10 +63,11 @@ export function ParticleGlobe({ className }: { className?: string }) {
     function render(rotation: number) {
       ctx!.clearRect(0, 0, width, height);
 
-      const radius = Math.min(width * 0.62, height * 1.7);
+      const radius = Math.max(width * 0.62, height * 1.95);
       const centerX = width / 2;
-      // Push the sphere's center well below the canvas so only the top cap peeks in.
-      const centerY = height + radius * 0.62;
+      // Push the sphere's center below the canvas so its cap fills the full
+      // section height, from just under the header down to the bottom.
+      const centerY = height + radius * 0.22;
 
       for (const pt of points) {
         const lon = pt.lon + rotation;
