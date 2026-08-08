@@ -26,6 +26,29 @@ export function FlagUS({ className }: FlagProps) {
   );
 }
 
+export function FlagUZ({ className }: FlagProps) {
+  const stars = Array.from({ length: 8 }, (_, i) => {
+    const angle = -90 + i * 12.5;
+    const rad = (angle * Math.PI) / 180;
+    const cx = 9 + 5 * Math.cos(rad);
+    const cy = 6 + 5 * Math.sin(rad);
+    return <circle key={i} cx={cx} cy={cy} r="0.6" fill="#fff" />;
+  });
+
+  return (
+    <svg viewBox="0 0 60 40" className={className} aria-hidden>
+      <rect width="60" height="40" fill="#1EB53A" />
+      <rect y="0" width="60" height="12" fill="#0099B5" />
+      <rect y="12" width="60" height="2" fill="#CE1126" />
+      <rect y="14" width="60" height="12" fill="#fff" />
+      <rect y="26" width="60" height="2" fill="#CE1126" />
+      <circle cx="8.5" cy="6" r="4.2" fill="#fff" />
+      <circle cx="10" cy="6" r="3.6" fill="#0099B5" />
+      {stars}
+    </svg>
+  );
+}
+
 export function FlagMD({ className }: FlagProps) {
   return (
     <svg viewBox="0 0 60 40" className={className} aria-hidden>

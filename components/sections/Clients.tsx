@@ -1,6 +1,6 @@
 "use client";
 
-import { FlagGB, FlagMD, FlagUS } from "@/components/ui/Flags";
+import { FlagGB, FlagMD, FlagUS, FlagUZ } from "@/components/ui/Flags";
 import type { ComponentType } from "react";
 
 interface ClientLogo {
@@ -10,16 +10,16 @@ interface ClientLogo {
 }
 
 const CLIENTS: ClientLogo[] = [
-  { src: "/images/clients/agiron.png", name: "AGIRON" },
-  { src: "/images/clients/avtotest7.jpg", name: "AVTOTEST7" },
-  { src: "/images/clients/donzar.png", name: "DONZAR" },
+  { src: "/images/clients/agiron.png", name: "AGIRON", Flag: FlagUZ },
+  { src: "/images/clients/avtotest7.jpg", name: "AVTOTEST7", Flag: FlagUZ },
+  { src: "/images/clients/donzar.png", name: "DONZAR", Flag: FlagUZ },
   { src: "/images/clients/easy-tag.jpg", name: "EASY TAG", Flag: FlagGB },
   { src: "/images/clients/enjen-digital.png", name: "ENJEN DIGITAL", Flag: FlagUS },
-  { src: "/images/clients/prava-on.png", name: "PRAVA-ON" },
+  { src: "/images/clients/prava-on.png", name: "PRAVA-ON", Flag: FlagUZ },
   { src: "/images/clients/refind-commerce.webp", name: "REFIND COMMERCE", Flag: FlagGB },
-  { src: "/images/clients/ria-marketing.png", name: "RIA MARKETING" },
+  { src: "/images/clients/ria-marketing.png", name: "RIA MARKETING", Flag: FlagUZ },
   { src: "/images/clients/sargu-trans.jpg", name: "SARGU TRANS", Flag: FlagMD },
-  { src: "/images/clients/soro.png", name: "SORO" },
+  { src: "/images/clients/soro.png", name: "SORO", Flag: FlagUZ },
 ];
 
 const LOOP = [...CLIENTS, ...CLIENTS];

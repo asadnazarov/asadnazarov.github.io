@@ -127,28 +127,26 @@ function validate(
 }
 
 function formatMessage(data: ConsultationPayload) {
+  // Every field from the form is always listed, in the same order as the
+  // form itself, so nothing is ever silently skipped. Empty optional
+  // fields show "—" instead of being omitted.
   const lines = [
     "🆕 *Новая заявка на консультацию ($100)*",
     "",
     `👤 *Имя:* ${data.firstName} ${data.lastName}`,
     `📧 *Email:* ${data.email}`,
     `🏢 *Компания:* ${data.companyName}`,
-  ];
-
-  if (data.companyWebsite) lines.push(`🌐 *Сайт:* ${data.companyWebsite}`);
-
-  lines.push(
+    `🌐 *Сайт компании:* ${data.companyWebsite || "—"}`,
     `👔 *Роль:* ${ROLE_LABELS[data.role]}`,
     `👥 *Размер компании:* ${COMPANY_SIZE_LABELS[data.companySize]}`,
     `💵 *Выручка:* ${REVENUE_LABELS[data.annualRevenue]}`,
     `💰 *Бюджет проекта:* ${BUDGET_LABELS[data.projectBudget]}`,
-    `🎯 *Интересует:* ${data.interests.map((i) => INTEREST_LABELS[i]).join(", ")}`,
-    `💬 *Чем помочь:* ${data.howCanWeHelp}`
-  );
-
-  if (data.additionalInfo) lines.push(`ℹ️ *Доп. информация:* ${data.additionalInfo}`);
-
-  lines.push("", `🌐 *Язык формы:* ${data.locale.toUpperCase()}`);
+    `💬 *Чем помочь:* ${data.howCanWeHelp}`,
+    `🎯 *Интересует:* ${data.interests.length ? data.interests.map((i) => INTEREST_LABELS[i]).join(", ") : "—"}`,
+    `ℹ️ *Доп. информация:* ${data.additionalInfo || "—"}`,
+    "",
+    `🌐 *Язык формы:* ${data.locale.toUpperCase()}`,
+  ];
 
   return lines.join("\n");
 }
