@@ -82,21 +82,20 @@ export const uz: Dictionary = {
     items: [
       {
         quote:
-          "Asad bizning jarayonimizni bitta qo'ng'iroqda tushundi va boshqa pudratchilar olti oyda va'da qilgan yechimni ikki haftada ishlab berdi.",
-        name: "Dilnoza Karimova",
-        role: "Marketing direktori, e-commerce",
+          "Asad juda mehnatkash va aloqada juda yaxshi. U men xohlagandek ijtimoiy tarmoqlarga post qo'yish avtomatlashtirishni sozlab berdi. Asad bilan yana ishlashni xohlayman.",
+        name: "Spencer Dean",
+        role: "Egasi, Enjen Digital (AQSH)",
       },
       {
         quote:
-          "Biz \"prezentatsiya bilan konsultant\"ni emas, o'zi kod yozadigan odamni qidirgan edik. Asad ikkala rolni ham bajardi va bizga oylab vaqtni tejadi.",
-        name: "Jasur Toshmatov",
-        role: "Operatsion direktor, chakana savdo tarmog'i",
+          "Ajoyib — Asad loyiham tugaguncha kechayu kunduz ishladi. U sotuv platformalarini, email va WhatsApp'ni to'liq avtomatik javob tizimiga birlashtirdi. Tez javoblar, ajoyib aloqa, ajoyib qiymat — kafolat beraman, bu narxga shunday katta ishni qila oladigan odamni topa olmaysiz.",
+        name: "Tom Pergam",
+        role: "Asoschisi, Refind Commerce va Easy Tag (Buyuk Britaniya)",
       },
       {
-        quote:
-          "Konsultatsiyadan keyin birinchi navbatda nimani avtomatlashtirish kerakligi haqida aniq tushunchaga ega bo'ldik. Ortiqcha gap yo'q — faqat aniq reja.",
-        name: "Aziz Rahimov",
-        role: "Asoschi, IT-kompaniya",
+        quote: "Asadbek gap yo'q — baraka toping. Man roziman, juda tez hal qilib berdingiz hamma o'zgarishlarni, rahmat.",
+        name: "Elmurod Amonov",
+        role: "Rahbari, Donzar",
       },
     ],
   },

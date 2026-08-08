@@ -1,5 +1,5 @@
 export const SITE_NAME = "Asad Nazarov";
-export const SITE_URL = "https://asadnazarov.ai";
+export const SITE_URL = "https://asadnazarov-ai.uz";
 
 export const SOCIALS = {
   telegram: "https://t.me/+sYvEnKnzLb03MGU6",
