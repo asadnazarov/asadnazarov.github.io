@@ -62,7 +62,6 @@ export function Hero() {
             <span className="hidden sm:block h-6 w-px bg-surface-border" />
             <span className="font-medium text-foreground">{t.hero.statCountries}</span>
           </div>
-          <div className="text-sm text-muted">{t.hero.founderLine}</div>
         </motion.div>
 
         <motion.div

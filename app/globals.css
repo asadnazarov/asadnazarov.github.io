@@ -52,6 +52,33 @@ body {
   color: var(--accent-foreground);
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.client-logo {
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.client-logo:hover {
+  transform: scale(1.28);
+  z-index: 10;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -63,5 +90,8 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none !important;
   }
 }

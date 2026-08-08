@@ -28,11 +28,10 @@ export interface Dictionary {
     statProjectsValue: string;
     statProjectsLabel: string;
     statCountries: string;
-    founderLine: string;
   };
   about: {
-    eyebrow: string;
     heading: string;
+    subheading: string;
     paragraphs: string[];
     credentials: string[];
   };

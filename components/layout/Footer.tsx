@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { SITE_NAME, SOCIALS } from "@/lib/constants";
 
 export function Footer() {
@@ -23,17 +22,14 @@ export function Footer() {
             <a href={`mailto:${t.footer.email}`} className="hover:text-accent transition-colors">
               {t.footer.email}
             </a>
-            <a href={SOCIALS.telegram} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-              {t.footer.telegram}
-            </a>
           </div>
         </div>
 
         <div>
           <div className="text-xs uppercase tracking-widest text-muted mb-4">{t.footer.socialsHeading}</div>
           <div className="flex flex-col gap-2 text-sm">
-            <a href={SOCIALS.linkedin} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-              LinkedIn
+            <a href={SOCIALS.telegram} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+              {t.footer.telegram}
             </a>
             <a href={SOCIALS.instagram} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
               Instagram
@@ -54,7 +50,6 @@ export function Footer() {
             <Link href="/terms/" prefetch={false} className="hover:text-accent transition-colors">
               {t.footer.terms}
             </Link>
-            <LanguageSwitcher />
           </div>
         </div>
       </div>

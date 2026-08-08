@@ -24,21 +24,18 @@ export const uz: Dictionary = {
     statProjectsValue: "10+",
     statProjectsLabel: "loyiha",
     statCountries: "AQSH · Yevropa · O'zbekiston",
-    founderLine: "Asoschisi — Asad Nazarov",
   },
   about: {
-    eyebrow: "Men haqimda",
-    heading: "Men kimman va nega menga AI joriy qilishni ishonish mumkin",
+    heading: "Men haqimda",
+    subheading: "Asad Nazarov kim?",
     paragraphs: [
       "Men — AI-arxitektorman: biznesni iqtisodiy jihatdan samaraliroq qiladigan tizimlarni loyihalayman va quraman — xarajatlarni qisqartiraman, jarayonlarni tezlashtiraman va foydani oshiraman. Shunchaki \"so'zda\" maslahat bermayman, o'zim kod yozaman va yechimlarni ishlab chiqarishga olib chiqaman.",
       "Men chakana savdo, e-commerce, xizmatlar sohasi va IT kompaniyalari bilan ishlaganman — kichik kompaniyalardan tortib Markaziy Osiyo, MDH va xalqaro bozordagi o'sib borayotgan kompaniyalargacha. Har bir loyihada vazifam bitta: AI qayerda real pul yoki vaqt tejashini aniqlash va yechimni \"pilot loyiha uchun pilot\" emas, ishlab chiqarishga olib chiqish.",
-      "Men vositachi agentlik orqali ishlamayman — siz men bilan bevosita muloqot qilasiz, va taklif qiladigan yechimlarni o'zim amalga oshiraman.",
     ],
     credentials: [
       "10+ amalga oshirilgan AI-tizim",
       "AQSH, Yevropa va O'zbekistondagi kompaniyalar bilan ishlash tajribasi",
       "To'liq sikl: g'oyadan va arxitekturadan ishlab chiqarish va qo'llab-quvvatlashgacha",
-      "Vositachisiz, bevosita ishlayman",
     ],
   },
   process: {
@@ -75,7 +72,7 @@ export const uz: Dictionary = {
         ],
       },
     ],
-    ctaText: "AI biznesingizga qanday yordam berishini bilmoqchimisiz?",
+    ctaText: "AI biznesingizga qanday yordam berishi mumkinligini bilmoqchimisiz?",
     ctaButton: "Bog'lanish",
   },
   testimonials: {
@@ -195,8 +192,8 @@ export const uz: Dictionary = {
   footer: {
     tagline: "AI-arxitektor. Biznesga real natija beradigan sun'iy intellektni joriy qilaman.",
     contactHeading: "Aloqa",
-    email: "hello@asadnazarov.ai",
-    telegram: "@asadnazarov",
+    email: "asadnazarov077@gmail.com",
+    telegram: "Telegram",
     socialsHeading: "Ijtimoiy tarmoqlar",
     rights: "Barcha huquqlar himoyalangan.",
     privacy: "Maxfiylik siyosati",
