@@ -9,7 +9,7 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section id="top" className="relative z-0 overflow-hidden pt-28 pb-24 md:pt-40 md:pb-32">
+    <section id="top" className="relative overflow-hidden pt-28 pb-24 md:pt-40 md:pb-32">
       <div className="absolute inset-0 -z-10">
         <DotField className="absolute inset-0" />
         <div
