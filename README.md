@@ -1,6 +1,6 @@
 # Asad Nazarov — AI-архитектор, лендинг
 
-Личный лендинг: позиционирование, кейсы, отзывы и форма-заявка на платную консультацию ($100) с уведомлением в Telegram. RU/UZ.
+Личный лендинг: позиционирование, методология работы, отзывы и отдельная страница заявки на платную консультацию ($100) с уведомлением в Telegram. RU/UZ.
 
 ## Стек
 
@@ -58,13 +58,16 @@ npx supabase functions deploy consultation --project-ref cukgjtedqppxjnoxnhtu
 ## Структура
 
 ```
-app/                  Next.js App Router: страницы, layout, статический экспорт
+app/
+  page.tsx                  Главная: Hero → Process → Testimonials → About
+  consultation/page.tsx     Отдельная страница формы заявки
+  privacy/, terms/          Политика конфиденциальности / условия использования
 components/
   layout/             Header, Footer
-  sections/           Hero, About, CaseStudies, Testimonials, Consultation
+  sections/           Hero, Process, Testimonials, About, ConsultationPage, LegalPage
   forms/               ConsultationForm + поля
-  ui/                  Button, Card, SectionHeading, LanguageSwitcher
-  motion/              FadeIn / StaggerGroup обёртки для Framer Motion
+  ui/                  Button (Button/ButtonLink/NavButton), Card, SectionHeading, LanguageSwitcher
+  motion/              FadeIn / StaggerGroup / DotField (анимированный фон)
 lib/
   i18n/                Словари ru/uz, LanguageContext
   validation/          Zod-схема формы (используется на клиенте и в Edge Function)
@@ -75,4 +78,4 @@ types/                 Общие TypeScript-типы
 .github/workflows/     Автодеплой на GitHub Pages
 ```
 
-Контент (био, кейсы, отзывы) — плейсхолдеры, отредактируйте под себя в `lib/i18n/dictionaries/ru.ts` и `uz.ts`.
+Контент (био, методология, отзывы) — плейсхолдеры, отредактируйте под себя в `lib/i18n/dictionaries/ru.ts` и `uz.ts`.

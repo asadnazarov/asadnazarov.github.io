@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { NavButton } from "@/components/ui/Button";
 import { SITE_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -39,12 +40,12 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <a
-            href="#consultation"
-            className="hidden sm:inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium hover:brightness-110 transition-all"
+          <NavButton
+            href="/consultation/"
+            className="hidden sm:inline-flex !px-4 !py-2"
           >
             {t.nav.cta}
-          </a>
+          </NavButton>
         </div>
       </div>
     </header>

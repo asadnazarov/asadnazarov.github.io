@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { SITE_NAME, SOCIALS } from "@/lib/constants";
@@ -46,7 +47,15 @@ export function Footer() {
           <span>
             © {year} {SITE_NAME}. {t.footer.rights}
           </span>
-          <LanguageSwitcher />
+          <div className="flex items-center gap-6">
+            <Link href="/privacy/" prefetch={false} className="hover:text-accent transition-colors">
+              {t.footer.privacy}
+            </Link>
+            <Link href="/terms/" prefetch={false} className="hover:text-accent transition-colors">
+              {t.footer.terms}
+            </Link>
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </footer>

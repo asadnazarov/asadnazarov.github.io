@@ -1,10 +1,9 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { CaseStudies } from "@/components/sections/CaseStudies";
+import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { Consultation } from "@/components/sections/Consultation";
+import { About } from "@/components/sections/About";
 
 export default function Home() {
   return (
@@ -12,10 +11,9 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <About />
-        <CaseStudies />
+        <Process />
         <Testimonials />
-        <Consultation />
+        <About />
       </main>
       <Footer />
     </>

@@ -1,4 +1,14 @@
-import type { BudgetOption, CaseStudy, NavItem, NeedOption, Testimonial } from "@/types";
+import type {
+  AnnualRevenue,
+  CompanySize,
+  Interest,
+  NavItem,
+  ProcessStep,
+  ProjectBudget,
+  Role,
+  SelectOption,
+  Testimonial,
+} from "@/types";
 
 export interface Dictionary {
   meta: {
@@ -15,54 +25,64 @@ export interface Dictionary {
     headlineAccent: string;
     subhead: string;
     cta: string;
-    stat1Value: string;
-    stat1Label: string;
-    stat2Value: string;
-    stat2Label: string;
-    stat3Value: string;
-    stat3Label: string;
+    statProjectsValue: string;
+    statProjectsLabel: string;
+    statCountries: string;
+    founderLine: string;
   };
   about: {
+    eyebrow: string;
     heading: string;
     paragraphs: string[];
     credentials: string[];
   };
-  cases: {
+  process: {
+    eyebrow: string;
     heading: string;
     subhead: string;
-    items: CaseStudy[];
-    labels: {
-      challenge: string;
-      solution: string;
-      result: string;
-    };
+    steps: ProcessStep[];
+    ctaText: string;
+    ctaButton: string;
   };
   testimonials: {
-    heading: string;
-    items: Testimonial[];
-  };
-  consultation: {
+    eyebrow: string;
     heading: string;
     subhead: string;
-    price: string;
+    items: Testimonial[];
+  };
+  consultationPage: {
+    backLabel: string;
+    eyebrow: string;
+    heading: string;
+    subhead: string;
+    priceLabel: string;
     priceNote: string;
-    outcomes: { title: string; description: string }[];
-    processHeading: string;
-    processSteps: string[];
   };
   form: {
-    nameLabel: string;
-    namePlaceholder: string;
-    contactLabel: string;
-    contactPlaceholder: string;
-    companyLabel: string;
-    companyPlaceholder: string;
-    needLabel: string;
-    needOptions: NeedOption[];
-    budgetLabel: string;
-    budgetOptions: BudgetOption[];
-    messageLabel: string;
-    messagePlaceholder: string;
+    firstNameLabel: string;
+    firstNamePlaceholder: string;
+    lastNameLabel: string;
+    lastNamePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    companyNameLabel: string;
+    companyNamePlaceholder: string;
+    companyWebsiteLabel: string;
+    companyWebsitePlaceholder: string;
+    roleLabel: string;
+    roleOptions: SelectOption<Role>[];
+    companySizeLabel: string;
+    companySizeOptions: SelectOption<CompanySize>[];
+    annualRevenueLabel: string;
+    annualRevenueOptions: SelectOption<AnnualRevenue>[];
+    projectBudgetLabel: string;
+    projectBudgetOptions: SelectOption<ProjectBudget>[];
+    howCanWeHelpLabel: string;
+    howCanWeHelpPlaceholder: string;
+    interestsLabel: string;
+    interestsOptions: SelectOption<Interest>[];
+    additionalInfoLabel: string;
+    additionalInfoPlaceholder: string;
     submit: string;
     submitting: string;
     successTitle: string;
@@ -70,12 +90,19 @@ export interface Dictionary {
     errorTitle: string;
     errorBody: string;
     errorFallbackCta: string;
+    selectPlaceholder: string;
     validation: {
-      nameRequired: string;
-      contactRequired: string;
-      needRequired: string;
-      budgetRequired: string;
-      messageRequired: string;
+      firstNameRequired: string;
+      lastNameRequired: string;
+      emailInvalid: string;
+      companyNameRequired: string;
+      companyWebsiteInvalid: string;
+      roleRequired: string;
+      companySizeRequired: string;
+      annualRevenueRequired: string;
+      projectBudgetRequired: string;
+      howCanWeHelpRequired: string;
+      interestsRequired: string;
     };
   };
   footer: {
@@ -85,5 +112,14 @@ export interface Dictionary {
     telegram: string;
     socialsHeading: string;
     rights: string;
+    privacy: string;
+    terms: string;
+  };
+  legal: {
+    privacyTitle: string;
+    privacyBody: string[];
+    termsTitle: string;
+    termsBody: string[];
+    backLabel: string;
   };
 }

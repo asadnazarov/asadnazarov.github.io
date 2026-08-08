@@ -2,25 +2,29 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { ButtonLink } from "@/components/ui/Button";
+import { NavButton } from "@/components/ui/Button";
+import { DotField } from "@/components/motion/DotField";
 
 export function Hero() {
   const { t } = useLanguage();
 
   return (
     <section id="top" className="relative overflow-hidden pt-28 pb-24 md:pt-40 md:pb-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
-        style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)" }}
-      />
+      <div className="absolute inset-0 -z-10">
+        <DotField className="absolute inset-0" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
+          style={{ background: "radial-gradient(circle, var(--accent-soft) 0%, transparent 70%)" }}
+        />
+      </div>
 
       <div className="relative mx-auto max-w-5xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 rounded-full border border-surface-border px-4 py-1.5 text-xs uppercase tracking-widest text-muted mb-8"
+          className="inline-flex items-center gap-2 rounded-full border border-surface-border bg-surface px-4 py-1.5 text-xs uppercase tracking-widest text-muted mb-8 shadow-sm"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           {t.hero.overline}
@@ -32,8 +36,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-balance"
         >
-          {t.hero.headline}{" "}
-          <span className="text-accent">{t.hero.headlineAccent}</span>
+          {t.hero.headline} <span className="text-accent">{t.hero.headlineAccent}</span>
         </motion.h1>
 
         <motion.p
@@ -49,27 +52,26 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10"
+          className="mt-10 flex flex-col items-center gap-6"
         >
-          <ButtonLink href="#consultation">{t.hero.cta}</ButtonLink>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <div>
+              <span className="font-display text-3xl text-accent">{t.hero.statProjectsValue}</span>
+              <span className="ml-2 text-sm text-muted">{t.hero.statProjectsLabel}</span>
+            </div>
+            <span className="hidden sm:block h-6 w-px bg-surface-border" />
+            <span className="font-medium text-foreground">{t.hero.statCountries}</span>
+          </div>
+          <div className="text-sm text-muted">{t.hero.founderLine}</div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.55 }}
-          className="mt-20 grid grid-cols-3 gap-6 border-t border-surface-border pt-10"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10"
         >
-          {[
-            { value: t.hero.stat1Value, label: t.hero.stat1Label },
-            { value: t.hero.stat2Value, label: t.hero.stat2Label },
-            { value: t.hero.stat3Value, label: t.hero.stat3Label },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div className="font-display text-2xl md:text-4xl text-accent">{stat.value}</div>
-              <div className="mt-1 text-xs md:text-sm text-muted leading-snug">{stat.label}</div>
-            </div>
-          ))}
+          <NavButton href="/consultation/">{t.hero.cta}</NavButton>
         </motion.div>
       </div>
     </section>

@@ -8,26 +8,58 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-type Need = "implementation" | "training" | "consultation" | "other";
+type Role = "owner" | "executive" | "manager" | "operations" | "technical" | "sales" | "marketing" | "finance" | "other";
+type CompanySize = "solo" | "2-10" | "11-50" | "51-200" | "200-plus";
+type AnnualRevenue = "under-100k" | "100k-500k" | "500k-1m" | "1m-2m" | "over-2m";
+type ProjectBudget = "under-10k" | "10k-50k" | "50k-100k" | "over-100k";
+type Interest = "leads_sales" | "customer_support" | "internal_ops" | "data_reporting" | "content_marketing" | "not_sure";
 
 interface ConsultationPayload {
-  name: string;
-  contact: string;
-  company?: string;
-  need: Need;
-  budget: string;
-  message: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  companyName: string;
+  companyWebsite?: string;
+  role: Role;
+  companySize: CompanySize;
+  annualRevenue: AnnualRevenue;
+  projectBudget: ProjectBudget;
+  howCanWeHelp: string;
+  interests: Interest[];
+  additionalInfo?: string;
   locale: "ru" | "uz";
 }
 
-const NEED_LABELS: Record<Need, string> = {
-  implementation: "Внедрение ИИ в компании",
-  training: "Обучение команды",
-  consultation: "Общая консультация",
-  other: "Другое",
-};
+const ROLE_VALUES = new Set<Role>([
+  "owner", "executive", "manager", "operations", "technical", "sales", "marketing", "finance", "other",
+]);
+const COMPANY_SIZE_VALUES = new Set<CompanySize>(["solo", "2-10", "11-50", "51-200", "200-plus"]);
+const REVENUE_VALUES = new Set<AnnualRevenue>(["under-100k", "100k-500k", "500k-1m", "1m-2m", "over-2m"]);
+const BUDGET_VALUES = new Set<ProjectBudget>(["under-10k", "10k-50k", "50k-100k", "over-100k"]);
+const INTEREST_VALUES = new Set<Interest>([
+  "leads_sales", "customer_support", "internal_ops", "data_reporting", "content_marketing", "not_sure",
+]);
 
-const NEED_VALUES = new Set<Need>(["implementation", "training", "consultation", "other"]);
+const ROLE_LABELS: Record<Role, string> = {
+  owner: "Владелец", executive: "Руководитель", manager: "Менеджер", operations: "Операции",
+  technical: "Технический специалист", sales: "Продажи", marketing: "Маркетинг", finance: "Финансы", other: "Другое",
+};
+const COMPANY_SIZE_LABELS: Record<CompanySize, string> = {
+  solo: "Только я / фрилансер", "2-10": "2–10 сотрудников", "11-50": "11–50 сотрудников",
+  "51-200": "51–200 сотрудников", "200-plus": "200+ сотрудников",
+};
+const REVENUE_LABELS: Record<AnnualRevenue, string> = {
+  "under-100k": "Менее $100 000", "100k-500k": "$100 000–500 000", "500k-1m": "$500 000–1 000 000",
+  "1m-2m": "$1–2 млн", "over-2m": "Более $2 млн",
+};
+const BUDGET_LABELS: Record<ProjectBudget, string> = {
+  "under-10k": "Менее $10 000", "10k-50k": "$10 000–50 000", "50k-100k": "$50 000–100 000", "over-100k": "Более $100 000",
+};
+const INTEREST_LABELS: Record<Interest, string> = {
+  leads_sales: "Привлечение клиентов и продажи", customer_support: "Поддержка клиентов",
+  internal_ops: "Внутренние процессы", data_reporting: "Обработка данных и отчётность",
+  content_marketing: "Контент и маркетинг", not_sure: "Пока не знаю",
+};
 
 function json(body: unknown, status: number) {
   return new Response(JSON.stringify(body), {
@@ -36,25 +68,50 @@ function json(body: unknown, status: number) {
   });
 }
 
-function validate(data: Record<string, unknown>): { ok: true; value: ConsultationPayload } | { ok: false; errors: { field: string; message: string }[] } {
+function validate(
+  data: Record<string, unknown>
+): { ok: true; value: ConsultationPayload } | { ok: false; errors: { field: string; message: string }[] } {
   const errors: { field: string; message: string }[] = [];
 
-  const name = typeof data.name === "string" ? data.name.trim() : "";
-  if (name.length < 2) errors.push({ field: "name", message: "nameRequired" });
+  const firstName = typeof data.firstName === "string" ? data.firstName.trim() : "";
+  if (firstName.length < 2) errors.push({ field: "firstName", message: "firstNameRequired" });
 
-  const contact = typeof data.contact === "string" ? data.contact.trim() : "";
-  if (contact.length < 3) errors.push({ field: "contact", message: "contactRequired" });
+  const lastName = typeof data.lastName === "string" ? data.lastName.trim() : "";
+  if (lastName.length < 2) errors.push({ field: "lastName", message: "lastNameRequired" });
 
-  const company = typeof data.company === "string" ? data.company.trim() : undefined;
+  const email = typeof data.email === "string" ? data.email.trim() : "";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push({ field: "email", message: "emailInvalid" });
 
-  const need = typeof data.need === "string" ? data.need : "";
-  if (!NEED_VALUES.has(need as Need)) errors.push({ field: "need", message: "needRequired" });
+  const companyName = typeof data.companyName === "string" ? data.companyName.trim() : "";
+  if (companyName.length < 2) errors.push({ field: "companyName", message: "companyNameRequired" });
 
-  const budget = typeof data.budget === "string" ? data.budget.trim() : "";
-  if (budget.length < 1) errors.push({ field: "budget", message: "budgetRequired" });
+  const companyWebsiteRaw = typeof data.companyWebsite === "string" ? data.companyWebsite.trim() : "";
+  const companyWebsite = companyWebsiteRaw || undefined;
 
-  const message = typeof data.message === "string" ? data.message.trim() : "";
-  if (message.length < 10) errors.push({ field: "message", message: "messageRequired" });
+  const role = typeof data.role === "string" ? (data.role as Role) : ("" as Role);
+  if (!ROLE_VALUES.has(role)) errors.push({ field: "role", message: "roleRequired" });
+
+  const companySize = typeof data.companySize === "string" ? (data.companySize as CompanySize) : ("" as CompanySize);
+  if (!COMPANY_SIZE_VALUES.has(companySize)) errors.push({ field: "companySize", message: "companySizeRequired" });
+
+  const annualRevenue =
+    typeof data.annualRevenue === "string" ? (data.annualRevenue as AnnualRevenue) : ("" as AnnualRevenue);
+  if (!REVENUE_VALUES.has(annualRevenue)) errors.push({ field: "annualRevenue", message: "annualRevenueRequired" });
+
+  const projectBudget =
+    typeof data.projectBudget === "string" ? (data.projectBudget as ProjectBudget) : ("" as ProjectBudget);
+  if (!BUDGET_VALUES.has(projectBudget)) errors.push({ field: "projectBudget", message: "projectBudgetRequired" });
+
+  const howCanWeHelp = typeof data.howCanWeHelp === "string" ? data.howCanWeHelp.trim() : "";
+  if (howCanWeHelp.length < 10) errors.push({ field: "howCanWeHelp", message: "howCanWeHelpRequired" });
+
+  const interestsRaw = Array.isArray(data.interests) ? data.interests : [];
+  const interests = interestsRaw.filter(
+    (v): v is Interest => typeof v === "string" && INTEREST_VALUES.has(v as Interest)
+  );
+  if (interests.length < 1) errors.push({ field: "interests", message: "interestsRequired" });
+
+  const additionalInfo = typeof data.additionalInfo === "string" ? data.additionalInfo.trim() || undefined : undefined;
 
   const locale = data.locale === "uz" ? "uz" : "ru";
 
@@ -62,7 +119,10 @@ function validate(data: Record<string, unknown>): { ok: true; value: Consultatio
 
   return {
     ok: true,
-    value: { name, contact, company, need: need as Need, budget, message, locale },
+    value: {
+      firstName, lastName, email, companyName, companyWebsite, role, companySize,
+      annualRevenue, projectBudget, howCanWeHelp, interests, additionalInfo, locale,
+    },
   };
 }
 
@@ -70,21 +130,25 @@ function formatMessage(data: ConsultationPayload) {
   const lines = [
     "🆕 *Новая заявка на консультацию ($100)*",
     "",
-    `👤 *Имя:* ${data.name}`,
-    `📞 *Контакт:* ${data.contact}`,
+    `👤 *Имя:* ${data.firstName} ${data.lastName}`,
+    `📧 *Email:* ${data.email}`,
+    `🏢 *Компания:* ${data.companyName}`,
   ];
 
-  if (data.company) {
-    lines.push(`🏢 *Компания:* ${data.company}`);
-  }
+  if (data.companyWebsite) lines.push(`🌐 *Сайт:* ${data.companyWebsite}`);
 
   lines.push(
-    `🎯 *Запрос:* ${NEED_LABELS[data.need]}`,
-    `💰 *Бюджет:* ${data.budget}`,
-    `💬 *Сообщение:* ${data.message}`,
-    "",
-    `🌐 *Язык формы:* ${data.locale.toUpperCase()}`
+    `👔 *Роль:* ${ROLE_LABELS[data.role]}`,
+    `👥 *Размер компании:* ${COMPANY_SIZE_LABELS[data.companySize]}`,
+    `💵 *Выручка:* ${REVENUE_LABELS[data.annualRevenue]}`,
+    `💰 *Бюджет проекта:* ${BUDGET_LABELS[data.projectBudget]}`,
+    `🎯 *Интересует:* ${data.interests.map((i) => INTEREST_LABELS[i]).join(", ")}`,
+    `💬 *Чем помочь:* ${data.howCanWeHelp}`
   );
+
+  if (data.additionalInfo) lines.push(`ℹ️ *Доп. информация:* ${data.additionalInfo}`);
+
+  lines.push("", `🌐 *Язык формы:* ${data.locale.toUpperCase()}`);
 
   return lines.join("\n");
 }
