@@ -3,15 +3,15 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { NavButton } from "@/components/ui/Button";
-import { DotField } from "@/components/motion/DotField";
+import { ParticleGlobe } from "@/components/motion/ParticleGlobe";
 
 export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section id="top" className="relative overflow-hidden pt-28 pb-24 md:pt-40 md:pb-32">
+    <section id="top" className="relative z-0 overflow-hidden pt-28 pb-24 md:pt-40 md:pb-32">
       <div className="absolute inset-0 -z-10">
-        <DotField className="absolute inset-0" />
+        <ParticleGlobe className="absolute inset-0" />
         <div
           aria-hidden
           className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-60 blur-[120px]"
