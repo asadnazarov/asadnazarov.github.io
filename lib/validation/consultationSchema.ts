@@ -35,7 +35,10 @@ export const consultationSchema = z.object({
   companyWebsite: z
     .string()
     .trim()
-    .refine((val) => val === "" || /^https?:\/\/.+\..+/.test(val), "companyWebsiteInvalid")
+    .refine(
+      (val) => val === "" || /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}([/?#]\S*)?$/i.test(val),
+      "companyWebsiteInvalid"
+    )
     .optional()
     .or(z.literal("")),
   role: z.enum(roles, { message: "roleRequired" }),
