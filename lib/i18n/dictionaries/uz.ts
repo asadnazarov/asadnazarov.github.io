@@ -84,7 +84,7 @@ export const uz: Dictionary = {
         quote:
           "Asad works very hard and has great communication. He setup a social media posting automation for me exactly how i envisioned it. I will work with Asad again.",
         name: "Spencer Dean",
-        role: "Egasi, Enjen Digital (AQSH)",
+        role: "Asoschisi, Enjen Digital (AQSH)",
       },
       {
         quote:
