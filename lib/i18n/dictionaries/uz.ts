@@ -17,7 +17,7 @@ export const uz: Dictionary = {
   hero: {
     overline: "AI-agentli tizimlar inzheneri",
     headline: "Xodimlar sonini oshirmasdan",
-    headlineAccent: "masshtablang.",
+    headlineAccent: "masshtablashing.",
     subhead:
       "Biznesingiz jarayonlaridagi kundalik qiyinchiliklarni tayyor AI-yechimlarga aylantiraman — ular real ishlaydi va foyda keltiradi, sizga esa texnologiyani chuqur o'rganish shart emas.",
     cta: "Bog'lanish",
