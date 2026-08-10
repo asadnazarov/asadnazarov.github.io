@@ -4,7 +4,7 @@ export const uz: Dictionary = {
   meta: {
     title: "Asad Nazarov — AI-agentli tizimlar muhandisi | Biznesga sun'iy intellekt joriy qilish",
     description:
-      "Arxitekturadan biznesning real ma'lumotlariga joriy qilishgacha agentli AI-tizimlar quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan. Shaxsiy konsultatsiya — hammasini o'zi yozadigan muhandis bilan.",
+      "Arxitekturadan biznesning real ma'lumotlariga joriy qilishgacha agentli AI-tizimlar quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan tizimlar. Shaxsiy konsultatsiya — barcha ishni o'zi bajaradigan muhandis bilan.",
   },
   nav: {
     items: [
@@ -17,9 +17,9 @@ export const uz: Dictionary = {
   hero: {
     overline: "AI-agentli tizimlar muhandisi",
     headline: "Xodimlar sonini oshirmasdan",
-    headlineAccent: "masshtablang.",
+    headlineAccent: "kengaying.",
     subhead:
-      "Biznesingizning kundalik qiyinchiliklarini tayyor AI-yechimlarga aylantiraman — real ishlaydigan va foyda keltiradigan, siz texnologiyani chuqur o'rganishingiz shart bo'lmagan yechimlarga.",
+      "Biznesingiz jarayonlaridagi kundalik qiyinchiliklarni tayyor AI-yechimlarga aylantiraman — ular real ishlaydi va foyda keltiradi, sizga esa texnologiyani chuqur o'rganish shart emas.",
     cta: "Bog'lanish",
     statProjectsValue: "10+",
     statProjectsLabel: "loyiha",
@@ -29,37 +29,37 @@ export const uz: Dictionary = {
     heading: "Men haqimda",
     subheading: "Asad Nazarov kim?",
     paragraphs: [
-      "Men — agentli tizimlar muhandisiman: AI-agentlarni arxitekturadan boshlab biznesingizning real ma'lumotlariga joriy qilishgacha quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan tarzda. Shunchaki qog'ozda loyihalamayman — yechimni ishlab chiqarishga o'zim olib chiqaman, u yerda alohida demo emas, balki sizning jarayonlaringiz va ma'lumotlaringiz bilan ishlaydi.",
-      "Men chakana savdo, e-commerce, xizmatlar sohasi va IT kompaniyalari bilan ishlaganman — kichik kompaniyalardan tortib Markaziy Osiyo, MDH va xalqaro bozordagi o'sib borayotgan kompaniyalargacha. Har bir loyihada vazifam bitta: AI qayerda real pul yoki vaqt tejashini aniqlash va yechimni \"pilot loyiha uchun pilot\" emas, ishlab chiqarishga olib chiqish.",
+      "Men — agentli tizimlar muhandisiman: AI-agentlarni arxitekturadan tortib, biznesingizning real ma'lumotlari bilan ishlaydigan darajagacha quraman — vaqtni tejaydigan, xarajatlarni kamaytiradigan va foydani oshiradigan tarzda. Shunchaki qog'ozda loyiha chizib qo'ymayman — yechimni ishlab chiqarish bosqichigacha o'zim olib boraman, u yerda alohida demo emas, aynan sizning jarayon va ma'lumotlaringiz bilan ishlaydi.",
+      "Men chakana savdo, e-commerce, xizmat ko'rsatish va IT sohasidagi jamoalar bilan ishlaganman — kichik kompaniyalardan tortib, Markaziy Osiyo, MDH va xalqaro bozorda o'sib borayotgan yirikroq kompaniyalargacha. Har bir loyihada vazifam bitta: AI aynan qayerda pul yoki vaqtni real tejashini aniqlash va yechimni shunchaki \"sinov uchun sinov\" qilib qoldirmay, ishlab chiqarishga olib chiqish.",
     ],
     credentials: [
-      "10+ amalga oshirilgan AI-tizim",
+      "10+ ishga tushirilgan AI-tizim",
       "AQSH, Yevropa va O'zbekistondagi kompaniyalar bilan ishlash tajribasi",
-      "To'liq sikl: g'oyadan va arxitekturadan ishlab chiqarish va qo'llab-quvvatlashgacha",
+      "To'liq jarayon: g'oya va arxitekturadan tortib, ishga tushirish va qo'llab-quvvatlashgacha",
     ],
   },
   process: {
     eyebrow: "Qanday ishlayman",
     heading: "Mening jarayonim",
     subhead:
-      "Past xavfli, izchil yondashuv: avval biznesingizni tushunaman, darhol vositalarga yopishmayman.",
+      "Xavfi past, izchil yondashuv: avval biznesingizni chuqur o'rganaman, shoshilib asboblarga o'tmayman.",
     steps: [
       {
         title: "O'rganish va diagnostika",
         tagline: "Avval tushunish, keyin avtomatlashtirish.",
         bullets: [
-          "Biznesingiz real qanday ishlashini o'rganaman: maqsadlar, cheklovlar, kim kim bilan ishlashi va \"g'alaba\" qanday ko'rinishi.",
-          "Tex-stekingizni va ma'lumotlar qayerda saqlanishini o'rganaman: CRM, pochta, jadvallar, ichki vositalar.",
-          "Real to'siqlarni topish va nimani avtomatlashtirish kerak-kerak emasligini aniqlash uchun jarayonlar auditini o'tkazaman.",
+          "Biznesingiz aslida qanday ishlashini o'rganaman: maqsadlar, cheklovlar, kim kim bilan ishlashi va \"muvaffaqiyat\" qanday ko'rinishi.",
+          "Qanday texnologiyalardan foydalanishingizni va ma'lumotlaringiz qayerda saqlanishini aniqlayman: CRM, pochta, jadvallar, ichki dasturlar.",
+          "Jarayonlaringizni tahlil qilib, haqiqiy qiyin joylarni topaman va nimani avtomatlashtirish kerak-kerakligini hal qilaman.",
         ],
       },
       {
         title: "Loyihalash va ishlab chiqish",
         tagline: "Ishga tushirishdan oldin sinovdan o'tgan individual yechimlar.",
         bullets: [
-          "Eng katta ta'sirga ega vazifalarni ustuvorlashtiraman va AI qayerda yordam berishi, qayerda bermasligini ochiq aytaman.",
-          "Individual workflow'larni loyihalab, quraman, turli yondashuvlarni real ma'lumotlarda sinayman va qarorlarni oddiy tilda tushuntiraman.",
-          "To'liq ishga tushirishdan oldin yechimlarni real muhitga yaqin sharoitda sinovdan o'tkazaman.",
+          "Eng katta natija beradigan vazifalarni birinchi o'ringa qo'yaman va AI qayerda foydali, qayerda foydasiz ekanini ochiq aytaman.",
+          "Individual workflow'larni loyihalab quraman, turli yondashuvlarni real ma'lumotlarda sinab ko'raman va qarorlarni oddiy tilda tushuntiraman.",
+          "To'liq ishga tushirishdan oldin yechimlarni real sharoitga yaqin muhitda sinovdan o'tkazaman.",
         ],
       },
       {
@@ -67,12 +67,12 @@ export const uz: Dictionary = {
         tagline: "Doimiy rivojlanish, bir martalik loyiha emas.",
         bullets: [
           "Aniq muvaffaqiyat ko'rsatkichlari va himoya mexanizmlari bilan ishlab chiqarishga chiqaraman.",
-          "Samaradorlikni kuzataman, jamoa va mijozlardan fikr-mulohaza yig'aman, muammolarni tezda hal qilaman.",
-          "Tizim biznesingiz bilan birga rivojlanishi uchun promptlar, mantiq va modellarni doimiy takomillashtiraman.",
+          "Samaradorlikni kuzatib boraman, jamoa va mijozlardan fikr yig'aman, muammolarni tezda hal qilaman.",
+          "Tizim biznesingiz bilan birga rivojlanishi uchun promptlar, mantiq va modellarni doimiy takomillashtirib boraman.",
         ],
       },
     ],
-    ctaText: "AI biznesingizga qanday yordam berishi mumkinligini bilmoqchimisiz?",
+    ctaText: "AI biznesingizga qanday yordam berishi mumkinligini bilishni xohlaysizmi?",
     ctaButton: "Bog'lanish",
   },
   testimonials: {
@@ -103,7 +103,7 @@ export const uz: Dictionary = {
     backLabel: "Orqaga",
     eyebrow: "Konsultatsiya",
     heading: "Bog'lanamiz",
-    subhead: "Biznesingiz haqida va AI yordamida qanday masshtablanishingiz mumkinligi haqida yozing.",
+    subhead: "Biznesingiz haqida va AI yordamida qanday kengayishingiz mumkinligi haqida yozing.",
     priceLabel: "Konsultatsiya — $100",
     priceNote: "To'lov va aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi — saytda oldindan to'lov yo'q.",
   },
