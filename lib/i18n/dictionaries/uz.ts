@@ -2,9 +2,9 @@ import type { Dictionary } from "@/lib/i18n/types";
 
 export const uz: Dictionary = {
   meta: {
-    title: "Asad Nazarov — AI-agentli tizimlar inzheneri | Biznesga sun'iy intellekt joriy qilish",
+    title: "Asad Nazarov — AI-agentli tizimlar muhandisi | Biznesga sun'iy intellekt joriy qilish",
     description:
-      "Arxitekturadan biznesning real ma'lumotlariga joriy qilishgacha agentli AI-tizimlar quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan tizimlar. Shaxsiy konsultatsiya — barcha ishni o'zi bajaradigan inzhener bilan.",
+      "Arxitekturadan biznesning real ma'lumotlariga joriy qilishgacha agentli AI-tizimlar quraman — vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan tizimlar. Shaxsiy konsultatsiya — barcha ishni o'zi bajaradigan muhandis bilan.",
   },
   nav: {
     items: [
@@ -15,7 +15,7 @@ export const uz: Dictionary = {
     cta: "Bog'lanish",
   },
   hero: {
-    overline: "AI-agentli tizimlar inzheneri",
+    overline: "AI-agentli tizimlar muhandisi",
     headline: "Xodimlar sonini oshirmasdan",
     headlineAccent: "masshtablashing.",
     subhead:
@@ -29,7 +29,7 @@ export const uz: Dictionary = {
     heading: "Men haqimda",
     subheading: "Asad Nazarov kim?",
     paragraphs: [
-      "Men — agentli tizimlar inzhenerman: AI-agentlarni arxitekturadan tortib, biznesingizning real ma'lumotlari bilan ishlaydigan darajagacha quraman — vaqtni tejaydigan, xarajatlarni kamaytiradigan va foydani oshiradigan tarzda. Shunchaki qog'ozda loyiha chizib qo'ymayman — yechimni ishlab chiqarish bosqichigacha o'zim olib boraman, u yerda alohida demo emas, aynan sizning jarayon va ma'lumotlaringiz bilan ishlaydi.",
+      "Men — agentli tizimlar muhandisiman: AI-agentlarni arxitekturadan tortib, biznesingizning real ma'lumotlari bilan ishlaydigan darajagacha quraman — vaqtni tejaydigan, xarajatlarni kamaytiradigan va foydani oshiradigan tarzda. Shunchaki qog'ozda loyiha chizib qo'ymayman — yechimni ishlab chiqarish bosqichigacha o'zim olib boraman, u yerda alohida demo emas, aynan sizning jarayon va ma'lumotlaringiz bilan ishlaydi.",
       "Men chakana savdo, e-commerce, xizmat ko'rsatish va IT sohasidagi jamoalar bilan ishlaganman — kichik kompaniyalardan tortib, Markaziy Osiyo, MDH va xalqaro bozorda o'sib borayotgan yirikroq kompaniyalargacha. Har bir loyihada vazifam bitta: AI aynan qayerda pul yoki vaqtni real tejashini aniqlash va yechimni shunchaki \"sinov uchun sinov\" qilib qoldirmay, ishlab chiqarishga olib chiqish.",
     ],
     credentials: [
@@ -189,7 +189,7 @@ export const uz: Dictionary = {
     },
   },
   footer: {
-    tagline: "AI-agentli tizimlar inzheneri. Vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan yechimlar quraman.",
+    tagline: "AI-agentli tizimlar muhandisi. Vaqtni tejaydigan, xarajatlarni qisqartiradigan va foydani oshiradigan yechimlar quraman.",
     contactHeading: "Aloqa",
     email: "asadnazarov077@gmail.com",
     telegram: "Telegram",
