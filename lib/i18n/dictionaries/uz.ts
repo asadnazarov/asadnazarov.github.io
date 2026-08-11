@@ -105,6 +105,7 @@ export const uz: Dictionary = {
     heading: "Bog'lanamiz",
     subhead: "Biznesingiz haqida va AI yordamida qanday kengayishingiz mumkinligi haqida yozing.",
     priceLabel: "Konsultatsiya — $100",
+    priceDuration: "90 daqiqa",
     priceNote: "To'lov va aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi — saytda oldindan to'lov yo'q.",
   },
   form: {
@@ -148,10 +149,10 @@ export const uz: Dictionary = {
     ],
     projectBudgetLabel: "Loyiha byudjeti",
     projectBudgetOptions: [
-      { value: "under-10k", label: "$10 000 dan kam" },
+      { value: "under-5k", label: "$5 000 dan kam" },
+      { value: "5k-10k", label: "$5 000–10 000" },
       { value: "10k-50k", label: "$10 000–50 000" },
-      { value: "50k-100k", label: "$50 000–100 000" },
-      { value: "over-100k", label: "$100 000 dan ko'p" },
+      { value: "over-50k", label: "$50 000 dan ko'p" },
     ],
     howCanWeHelpLabel: "Sizga qanday yordam bera olaman?",
     howCanWeHelpPlaceholder: "Nimaga erishmoqchi ekaningizni yozing...",

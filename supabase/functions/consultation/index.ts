@@ -11,7 +11,7 @@ const CORS_HEADERS = {
 type Role = "owner" | "executive" | "manager" | "operations" | "technical" | "sales" | "marketing" | "finance" | "other";
 type CompanySize = "solo" | "2-10" | "11-50" | "51-200" | "200-plus";
 type AnnualRevenue = "under-100k" | "100k-500k" | "500k-1m" | "1m-2m" | "over-2m";
-type ProjectBudget = "under-10k" | "10k-50k" | "50k-100k" | "over-100k";
+type ProjectBudget = "under-5k" | "5k-10k" | "10k-50k" | "over-50k";
 type Interest = "leads_sales" | "customer_support" | "internal_ops" | "data_reporting" | "content_marketing" | "not_sure";
 
 interface ConsultationPayload {
@@ -35,7 +35,7 @@ const ROLE_VALUES = new Set<Role>([
 ]);
 const COMPANY_SIZE_VALUES = new Set<CompanySize>(["solo", "2-10", "11-50", "51-200", "200-plus"]);
 const REVENUE_VALUES = new Set<AnnualRevenue>(["under-100k", "100k-500k", "500k-1m", "1m-2m", "over-2m"]);
-const BUDGET_VALUES = new Set<ProjectBudget>(["under-10k", "10k-50k", "50k-100k", "over-100k"]);
+const BUDGET_VALUES = new Set<ProjectBudget>(["under-5k", "5k-10k", "10k-50k", "over-50k"]);
 const INTEREST_VALUES = new Set<Interest>([
   "leads_sales", "customer_support", "internal_ops", "data_reporting", "content_marketing", "not_sure",
 ]);
@@ -53,7 +53,7 @@ const REVENUE_LABELS: Record<AnnualRevenue, string> = {
   "1m-2m": "$1–2 млн", "over-2m": "Более $2 млн",
 };
 const BUDGET_LABELS: Record<ProjectBudget, string> = {
-  "under-10k": "Менее $10 000", "10k-50k": "$10 000–50 000", "50k-100k": "$50 000–100 000", "over-100k": "Более $100 000",
+  "under-5k": "Менее $5 000", "5k-10k": "$5 000–10 000", "10k-50k": "$10 000–50 000", "over-50k": "Более $50 000",
 };
 const INTEREST_LABELS: Record<Interest, string> = {
   leads_sales: "Привлечение клиентов и продажи", customer_support: "Поддержка клиентов",

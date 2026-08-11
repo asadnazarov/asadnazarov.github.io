@@ -55,6 +55,7 @@ export interface Dictionary {
     heading: string;
     subhead: string;
     priceLabel: string;
+    priceDuration: string;
     priceNote: string;
   };
   form: {

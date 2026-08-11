@@ -38,8 +38,18 @@ export function ConsultationPage() {
         </FadeIn>
 
         <FadeIn delay={0.1} className="mb-8 rounded-2xl border border-accent/30 bg-accent-soft px-6 py-4 text-center">
-          <div className="font-display text-2xl text-accent">{t.consultationPage.priceLabel}</div>
-          <p className="mt-1 text-sm text-muted">{t.consultationPage.priceNote}</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="font-display text-2xl text-accent">{t.consultationPage.priceLabel}</div>
+            <span className="hidden sm:block h-6 w-px bg-accent/30" />
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-background px-3 py-1 text-sm font-medium text-accent">
+              <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.5 2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {t.consultationPage.priceDuration}
+            </div>
+          </div>
+          <p className="mt-2 text-sm text-muted">{t.consultationPage.priceNote}</p>
         </FadeIn>
 
         <FadeIn delay={0.2}>
