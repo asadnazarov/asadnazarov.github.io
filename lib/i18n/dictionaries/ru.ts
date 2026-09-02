@@ -184,9 +184,8 @@ export const ru: Dictionary = {
       { value: "over-2m", label: "Более $2 млн" },
     ],
     projectBudgetLabel: "Бюджет проекта",
-    projectBudgetHint: "Минимальный бюджет проекта — от $1500.",
     projectBudgetOptions: [
-      { value: "under-5k", label: "Менее $5 000" },
+      { value: "under-5k", label: "$1500 — минимальный требуемый бюджет" },
       { value: "5k-10k", label: "$5 000–10 000" },
       { value: "10k-50k", label: "$10 000–50 000" },
       { value: "over-50k", label: "Более $50 000" },

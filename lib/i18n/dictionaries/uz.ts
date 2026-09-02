@@ -187,9 +187,8 @@ export const uz: Dictionary = {
       { value: "over-2m", label: "$2 mln dan ko'p" },
     ],
     projectBudgetLabel: "Loyiha byudjeti",
-    projectBudgetHint: "Loyihaning minimal byudjeti — $1500 dan.",
     projectBudgetOptions: [
-      { value: "under-5k", label: "$5 000 dan kam" },
+      { value: "under-5k", label: "$1500 — talab qilinadigan eng kam byudjet" },
       { value: "5k-10k", label: "$5 000–10 000" },
       { value: "10k-50k", label: "$10 000–50 000" },
       { value: "over-50k", label: "$50 000 dan ko'p" },

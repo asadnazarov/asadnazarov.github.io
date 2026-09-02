@@ -197,9 +197,6 @@ export function ConsultationForm() {
           <option value="" disabled>
             {t.form.selectPlaceholder}
           </option>
-          <option value="_hint" disabled>
-            {t.form.projectBudgetHint}
-          </option>
           {t.form.projectBudgetOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}

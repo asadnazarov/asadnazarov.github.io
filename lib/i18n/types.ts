@@ -79,7 +79,6 @@ export interface Dictionary {
     annualRevenueLabel: string;
     annualRevenueOptions: SelectOption<AnnualRevenue>[];
     projectBudgetLabel: string;
-    projectBudgetHint: string;
     projectBudgetOptions: SelectOption<ProjectBudget>[];
     howCanWeHelpLabel: string;
     howCanWeHelpPlaceholder: string;

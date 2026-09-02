@@ -53,7 +53,7 @@ const REVENUE_LABELS: Record<AnnualRevenue, string> = {
   "1m-2m": "$1–2 млн", "over-2m": "Более $2 млн",
 };
 const BUDGET_LABELS: Record<ProjectBudget, string> = {
-  "under-5k": "Менее $5 000", "5k-10k": "$5 000–10 000", "10k-50k": "$10 000–50 000", "over-50k": "Более $50 000",
+  "under-5k": "$1500 — минимальный требуемый бюджет", "5k-10k": "$5 000–10 000", "10k-50k": "$10 000–50 000", "over-50k": "Более $50 000",
 };
 const INTEREST_LABELS: Record<Interest, string> = {
   leads_sales: "Привлечение клиентов и продажи", customer_support: "Поддержка клиентов",
