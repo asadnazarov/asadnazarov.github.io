@@ -1,0 +1,18 @@
+name: Keep Supabase warm
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Edge Function (keeps free-tier project from auto-pausing)
+        run: |
+          curl -sS -o /dev/null -w "consultation function responded: %{http_code}\n" \
+            -X POST "https://cukgjtedqppxjnoxnhtu.supabase.co/functions/v1/consultation" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1a2dqdGVkcXBweGpub3huaHR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwMTQ1OTcsImV4cCI6MjEwMTU5MDU5N30.3f3ljP76GNcWirOY8Yzq8aVF1_HbgY6xpUIJN4A2DCs" \
+            -d '{}'
