@@ -107,14 +107,13 @@ export const uz: Dictionary = {
     priceLabel: "Konsultatsiya — $100",
     priceDuration: "90 daqiqa",
     priceNote: "To'lov va aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi — saytda oldindan to'lov yo'q.",
-    valueHeading: "Biznesda AI joriy etish bo'yicha konsultatsiya — $100",
     valueIntro: [
       "AI biznesdagi o'nlab vazifalarni hal qilishi mumkin. Ammo bu uni har bir jarayonga joriy qilish kerak degani emas.",
       "Shuning uchun konsultatsiyani «Sizga qanday AI-agent yaratib beraylik?» degan savoldan boshlamaymiz. Avvalo biznesingizni o'rganamiz.",
       "90 daqiqa davomida biznesingizdagi mavjud jarayonlar, vazifalar va muammolarni batafsil tahlil qilamiz. Siz biznesingizda nimalarni yaxshilamoqchi ekaningizni va ayni paytda siz uchun eng muhim bo'lgan vazifalarni aytib berasiz.",
       "Shundan so'ng biz halol tahlil o'tkazib, AI aynan qayerda sizning biznesingizga real natija bera olishini, qayerda esa hozircha uni joriy qilishga ehtiyoj yo'qligini aniqlaymiz.",
     ],
-    valueSubheading: "Konsultatsiyadan so'ng sizda nima bo'ladi?",
+    valueSubheading: "90 daqiqalik konsultatsiyada nimaga ega bo'lasiz?",
     valueItems: [
       {
         title: "Biznesingiz bo'yicha diagnostika",

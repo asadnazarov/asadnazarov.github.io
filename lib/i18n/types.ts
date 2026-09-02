@@ -57,7 +57,6 @@ export interface Dictionary {
     priceLabel: string;
     priceDuration: string;
     priceNote: string;
-    valueHeading: string;
     valueIntro: string[];
     valueSubheading: string;
     valueItems: { title: string; body: string[] }[];

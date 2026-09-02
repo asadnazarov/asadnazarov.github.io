@@ -37,8 +37,8 @@ export function ConsultationPage() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1} className="mb-8 rounded-2xl border border-accent/30 bg-accent-soft px-6 py-4 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+        <FadeIn delay={0.1} className="mb-8 rounded-2xl border border-accent/30 bg-accent-soft px-6 py-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-center">
             <div className="font-display text-2xl text-accent">{t.consultationPage.priceLabel}</div>
             <span className="hidden sm:block h-6 w-px bg-accent/30" />
             <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-background px-3 py-1 text-sm font-medium text-accent">
@@ -49,42 +49,50 @@ export function ConsultationPage() {
               {t.consultationPage.priceDuration}
             </div>
           </div>
-          <p className="mt-2 text-sm text-muted">{t.consultationPage.priceNote}</p>
-        </FadeIn>
+          <p className="mt-2 text-sm text-muted text-center">{t.consultationPage.priceNote}</p>
 
-        <FadeIn delay={0.2} className="mb-8">
-          <Card className="p-6 md:p-10">
-            <h2 className="font-display text-2xl md:text-3xl leading-snug tracking-tight">
-              {t.consultationPage.valueHeading}
-            </h2>
-            <div className="mt-6 space-y-4 text-muted leading-relaxed">
-              {t.consultationPage.valueIntro.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <h3 className="font-display text-xl mt-10 mb-6">{t.consultationPage.valueSubheading}</h3>
-            <div className="space-y-6">
-              {t.consultationPage.valueItems.map((item, i) => (
-                <div key={item.title} className="flex gap-4">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent font-display text-sm">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-foreground mb-1.5">{item.title}</div>
-                    <div className="space-y-2 text-sm text-muted leading-relaxed">
-                      {item.body.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
+          <details className="group mt-4 rounded-xl border border-accent/20 bg-background">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-foreground marker:content-none">
+              <span>{t.consultationPage.valueSubheading}</span>
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                className="h-4 w-4 shrink-0 text-accent transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </summary>
+            <div className="px-4 pb-4 pt-1 text-left">
+              <div className="space-y-3 text-sm text-muted leading-relaxed">
+                {t.consultationPage.valueIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <div className="mt-5 space-y-5">
+                {t.consultationPage.valueItems.map((item, i) => (
+                  <div key={item.title} className="flex gap-3">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent font-display text-xs">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground mb-1">{item.title}</div>
+                      <div className="space-y-1.5 text-sm text-muted leading-relaxed">
+                        {item.body.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </Card>
+          </details>
         </FadeIn>
 
-        <FadeIn delay={0.3}>
+        <FadeIn delay={0.2}>
           <Card className="p-6 md:p-10">
             <ConsultationForm />
           </Card>

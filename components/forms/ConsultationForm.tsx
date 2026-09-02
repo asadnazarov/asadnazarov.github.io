@@ -191,12 +191,11 @@ export function ConsultationForm() {
       <FormField
         label={t.form.projectBudgetLabel}
         htmlFor="projectBudget"
-        hint={t.form.projectBudgetHint}
         error={validationMessage(errors.projectBudget?.message)}
       >
         <select id="projectBudget" className={inputClass} defaultValue="" {...register("projectBudget")}>
           <option value="" disabled>
-            {t.form.selectPlaceholder}
+            {t.form.projectBudgetHint}
           </option>
           {t.form.projectBudgetOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
