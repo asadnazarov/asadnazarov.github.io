@@ -52,7 +52,39 @@ export function ConsultationPage() {
           <p className="mt-2 text-sm text-muted">{t.consultationPage.priceNote}</p>
         </FadeIn>
 
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.2} className="mb-8">
+          <Card className="p-6 md:p-10">
+            <h2 className="font-display text-2xl md:text-3xl leading-snug tracking-tight">
+              {t.consultationPage.valueHeading}
+            </h2>
+            <div className="mt-6 space-y-4 text-muted leading-relaxed">
+              {t.consultationPage.valueIntro.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            <h3 className="font-display text-xl mt-10 mb-6">{t.consultationPage.valueSubheading}</h3>
+            <div className="space-y-6">
+              {t.consultationPage.valueItems.map((item, i) => (
+                <div key={item.title} className="flex gap-4">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent font-display text-sm">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-foreground mb-1.5">{item.title}</div>
+                    <div className="space-y-2 text-sm text-muted leading-relaxed">
+                      {item.body.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </FadeIn>
+
+        <FadeIn delay={0.3}>
           <Card className="p-6 md:p-10">
             <ConsultationForm />
           </Card>

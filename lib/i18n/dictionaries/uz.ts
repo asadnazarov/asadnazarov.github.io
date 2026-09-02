@@ -102,11 +102,51 @@ export const uz: Dictionary = {
   consultationPage: {
     backLabel: "Orqaga",
     eyebrow: "Konsultatsiya",
-    heading: "Bog'lanamiz",
+    heading: "AI biznesingiz o'sishini qayerda tezlashtirishini bilib olaylik",
     subhead: "Biznesingiz haqida va AI yordamida qanday kengayishingiz mumkinligi haqida yozing.",
     priceLabel: "Konsultatsiya — $100",
     priceDuration: "90 daqiqa",
     priceNote: "To'lov va aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi — saytda oldindan to'lov yo'q.",
+    valueHeading: "Biznesda AI joriy etish bo'yicha konsultatsiya — $100",
+    valueIntro: [
+      "AI biznesdagi o'nlab vazifalarni hal qilishi mumkin. Ammo bu uni har bir jarayonga joriy qilish kerak degani emas.",
+      "Shuning uchun konsultatsiyani «Sizga qanday AI-agent yaratib beraylik?» degan savoldan boshlamaymiz. Avvalo biznesingizni o'rganamiz.",
+      "90 daqiqa davomida biznesingizdagi mavjud jarayonlar, vazifalar va muammolarni batafsil tahlil qilamiz. Siz biznesingizda nimalarni yaxshilamoqchi ekaningizni va ayni paytda siz uchun eng muhim bo'lgan vazifalarni aytib berasiz.",
+      "Shundan so'ng biz halol tahlil o'tkazib, AI aynan qayerda sizning biznesingizga real natija bera olishini, qayerda esa hozircha uni joriy qilishga ehtiyoj yo'qligini aniqlaymiz.",
+    ],
+    valueSubheading: "Konsultatsiyadan so'ng sizda nima bo'ladi?",
+    valueItems: [
+      {
+        title: "Biznesingiz bo'yicha diagnostika",
+        body: [
+          "AI aynan sizning kompaniyangizga qayerda foyda keltirishi mumkinligini aniqlaymiz.",
+          "Masalan, qaysi jarayonlarni avtomatlashtirish, xodimlarning vaqtini tejash, mijozlar bilan ishlashni yaxshilash, takroriy qo'l mehnatini kamaytirish yoki ish samaradorligini oshirish mumkinligini ko'rib chiqamiz.",
+          "Shu bilan birga, real foyda bermaydigan jarayonlarga AI joriy qilishni ham tavsiya qilmaymiz.",
+        ],
+      },
+      {
+        title: "Sohangiz uchun AI imkoniyatlarini tushunish",
+        body: [
+          "Sizning sohangizdagi bizneslarda qanday texnologiyalar va yechimlardan foydalanilayotganini ko'rib chiqamiz va ulardan qaysilari sizning biznesingizga mos kelishi mumkinligini aniqlaymiz.",
+          "Maqsadimiz sizga imkon qadar ko'p AI vositalarini ko'rsatish emas, balki biznesingiz uchun haqiqatan ham foydali bo'lgan yechimlarni aniqlash.",
+        ],
+      },
+      {
+        title: "Joriy etish bo'yicha ustuvor yo'nalishlar",
+        body: [
+          "Qaysi vazifalardan boshlash kerakligini, qaysi yechim eng katta natija berishini va nimalarni keyinroq amalga oshirish mumkinligini birgalikda aniqlaymiz.",
+          "Natijada sizda aniqroq tushuncha paydo bo'ladi: nimani hozir avtomatlashtirish kerak, nimani keyinroq qilish mumkin va nimani umuman avtomatlashtirish shart emas.",
+        ],
+      },
+      {
+        title: "Sizning biznesingiz uchun individual tijoriy taklif",
+        body: [
+          "Agar diagnostika natijasida biznesingiz uchun aniq AI yechimini joriy qilish maqsadga muvofiq ekanini ko'rsak, siz uchun individual taklif tayyorlaymiz.",
+          "Unda qanday yechim joriy qilinishi, u qaysi vazifalarni hal qilishi va uni amalga oshirish qancha turishi aniq ko'rsatiladi.",
+          "Agar hozircha AI joriy qilish sizga kerak emas deb hisoblasak — buni ham ochiq aytamiz.",
+        ],
+      },
+    ],
   },
   form: {
     firstNameLabel: "Ism",
@@ -148,6 +188,7 @@ export const uz: Dictionary = {
       { value: "over-2m", label: "$2 mln dan ko'p" },
     ],
     projectBudgetLabel: "Loyiha byudjeti",
+    projectBudgetHint: "Loyihaning minimal byudjeti — $1500 dan.",
     projectBudgetOptions: [
       { value: "under-5k", label: "$5 000 dan kam" },
       { value: "5k-10k", label: "$5 000–10 000" },

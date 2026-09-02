@@ -191,6 +191,7 @@ export function ConsultationForm() {
       <FormField
         label={t.form.projectBudgetLabel}
         htmlFor="projectBudget"
+        hint={t.form.projectBudgetHint}
         error={validationMessage(errors.projectBudget?.message)}
       >
         <select id="projectBudget" className={inputClass} defaultValue="" {...register("projectBudget")}>

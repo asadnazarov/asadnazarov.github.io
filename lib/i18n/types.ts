@@ -57,6 +57,10 @@ export interface Dictionary {
     priceLabel: string;
     priceDuration: string;
     priceNote: string;
+    valueHeading: string;
+    valueIntro: string[];
+    valueSubheading: string;
+    valueItems: { title: string; body: string[] }[];
   };
   form: {
     firstNameLabel: string;
@@ -76,6 +80,7 @@ export interface Dictionary {
     annualRevenueLabel: string;
     annualRevenueOptions: SelectOption<AnnualRevenue>[];
     projectBudgetLabel: string;
+    projectBudgetHint: string;
     projectBudgetOptions: SelectOption<ProjectBudget>[];
     howCanWeHelpLabel: string;
     howCanWeHelpPlaceholder: string;
