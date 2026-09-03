@@ -142,7 +142,7 @@ export const uz: Dictionary = {
         body: [
           "Agar diagnostika natijasida biznesingiz uchun aniq AI yechimini joriy qilish maqsadga muvofiq ekanini ko'rsak, siz uchun individual taklif tayyorlaymiz.",
           "Unda qanday yechim joriy qilinishi, u qaysi vazifalarni hal qilishi va uni amalga oshirish qancha turishi aniq ko'rsatiladi.",
-          "Agar hozircha AI joriy qilish sizga kerak emas deb hisoblasak — buni ham ochiq aytamiz.",
+          "Men bilan ishlashga qaror qilsangiz — bu $100 joriy etish narxiga kiradi va konsultatsiya siz uchun amalda bepul bo'ladi.",
         ],
       },
     ],
