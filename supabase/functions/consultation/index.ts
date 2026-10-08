@@ -131,7 +131,7 @@ function formatMessage(data: ConsultationPayload) {
   // form itself, so nothing is ever silently skipped. Empty optional
   // fields show "—" instead of being omitted.
   const lines = [
-    "🆕 *Новая заявка на консультацию ($100)*",
+    "🆕 *Новая заявка на бесплатную консультацию*",
     "",
     `👤 *Имя:* ${data.firstName} ${data.lastName}`,
     `📧 *Email:* ${data.email}`,

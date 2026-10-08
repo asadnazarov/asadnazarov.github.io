@@ -104,16 +104,16 @@ export const uz: Dictionary = {
     eyebrow: "Konsultatsiya",
     heading: "AI biznesingiz o'sishini qayerda tezlashtirishini bilib olaylik",
     subhead: "Biznesingiz haqida va AI yordamida qanday kengayishingiz mumkinligi haqida yozing.",
-    priceLabel: "Konsultatsiya — $100",
-    priceDuration: "90 daqiqa",
-    priceNote: "To'lov va aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi — saytda oldindan to'lov yo'q.",
+    priceLabel: "Bepul konsultatsiya",
+    priceDuration: "30 daqiqa",
+    priceNote: "Aniq vaqt ariza yuborilgandan keyin shaxsan kelishiladi.",
     valueIntro: [
       "AI biznesdagi o'nlab vazifalarni hal qilishi mumkin. Ammo bu uni har bir jarayonga joriy qilish kerak degani emas.",
       "Shuning uchun konsultatsiyani «Sizga qanday AI-agent yaratib beraylik?» degan savoldan boshlamaymiz. Avvalo biznesingizni o'rganamiz.",
-      "90 daqiqa davomida biznesingizdagi mavjud jarayonlar, vazifalar va muammolarni batafsil tahlil qilamiz. Siz biznesingizda nimalarni yaxshilamoqchi ekaningizni va ayni paytda siz uchun eng muhim bo'lgan vazifalarni aytib berasiz.",
+      "30 daqiqa davomida biznesingizdagi mavjud jarayonlar, vazifalar va muammolarni batafsil tahlil qilamiz. Siz biznesingizda nimalarni yaxshilamoqchi ekaningizni va ayni paytda siz uchun eng muhim bo'lgan vazifalarni aytib berasiz.",
       "Shundan so'ng biz halol tahlil o'tkazib, AI aynan qayerda sizning biznesingizga real natija bera olishini, qayerda esa hozircha uni joriy qilishga ehtiyoj yo'qligini aniqlaymiz.",
     ],
-    valueSubheading: "90 daqiqalik konsultatsiyada nimaga ega bo'lasiz?",
+    valueSubheading: "30 daqiqalik konsultatsiyada nimaga ega bo'lasiz?",
     valueItems: [
       {
         title: "Biznesingiz bo'yicha diagnostika",
@@ -142,7 +142,6 @@ export const uz: Dictionary = {
         body: [
           "Agar diagnostika natijasida biznesingiz uchun aniq AI yechimini joriy qilish maqsadga muvofiq ekanini ko'rsak, siz uchun individual taklif tayyorlaymiz.",
           "Unda qanday yechim joriy qilinishi, u qaysi vazifalarni hal qilishi va uni amalga oshirish qancha turishi aniq ko'rsatiladi.",
-          "Men bilan ishlashga qaror qilsangiz — bu $100 joriy etish narxiga kiradi va konsultatsiya siz uchun amalda bepul bo'ladi.",
         ],
       },
     ],
@@ -209,7 +208,7 @@ export const uz: Dictionary = {
     submit: "Arizani yuborish",
     submitting: "Yuborilmoqda...",
     successTitle: "Ariza yuborildi",
-    successBody: "Rahmat! Vaqt va to'lovni kelishish uchun 24 soat ichida siz bilan bog'lanaman.",
+    successBody: "Rahmat! Vaqtni kelishish uchun 24 soat ichida siz bilan bog'lanaman.",
     errorTitle: "Yuborib bo'lmadi",
     errorBody: "Qayta urinib ko'ring yoki menga to'g'ridan-to'g'ri Telegram orqali yozing.",
     errorFallbackCta: "Telegram orqali yozish",
@@ -248,7 +247,7 @@ export const uz: Dictionary = {
     ],
     termsTitle: "Foydalanish shartlari",
     termsBody: [
-      "Konsultatsiya narxi — $100. To'lov va aniq vaqt siz saytdagi forma orqali ariza yuborganingizdan keyin shaxsan kelishiladi.",
+      "Konsultatsiya bepul va 30 daqiqa davom etadi. Aniq vaqt siz saytdagi forma orqali ariza yuborganingizdan keyin shaxsan kelishiladi.",
       "Formani to'ldirish moliyaviy majburiyat hisoblanmaydi — saytda hech narsa to'lamaysiz.",
       "Agar vazifa bizning tajribamizga mos kelmasa, konsultatsiyadan bosh tortish huquqini o'zimizda saqlaymiz.",
       "Sayt mazmuni \"bor holicha\" taqdim etiladi va yuridik yoki moliyaviy maslahat hisoblanmaydi.",
