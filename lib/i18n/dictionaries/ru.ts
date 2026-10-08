@@ -78,7 +78,7 @@ export const ru: Dictionary = {
   },
   clients: {
     countLabel: "компаний доверили мне свои процессы",
-    dragHint: "Покрутите",
+    allLabel: "Все",
   },
   worldMap: {
     eyebrow: "География",

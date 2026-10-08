@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { MotionValue } from "framer-motion";
 import * as THREE from "three";
-import { feature } from "topojson-client";
+import { feature, mesh } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { MultiPolygon, Polygon } from "geojson";
 import { COUNTRY_PINS, clientsIn } from "@/lib/clients";
@@ -51,8 +51,20 @@ const surfaceFrag = /* glsl */ `
   uniform float uFogFar;
   uniform vec3 uBg;
   uniform float uReady;
+  uniform sampler2D uBorders;   // r = crisp country borders, g = their soft glow
+  uniform sampler2D uCountryId; // r = id of a client country (1..4), nearest-filtered
+  uniform vec4 uHighlight;      // ignition of each client country, in COUNTRY_PINS order
   varying vec2 vUv;
   varying vec3 vWorld;
+
+  float highlightAt(vec2 uv) {
+    float id = floor(texture2D(uCountryId, uv).r * 255.0 / 60.0 + 0.5);
+    if (id < 0.5) return 0.0;
+    if (id < 1.5) return uHighlight.x;
+    if (id < 2.5) return uHighlight.y;
+    if (id < 3.5) return uHighlight.z;
+    return uHighlight.w;
+  }
 
   float hgt(vec2 p, float t) {
     float h = sin(p.x * 1.3 + t * 0.9) * 0.5;
@@ -63,20 +75,16 @@ const surfaceFrag = /* glsl */ `
   }
 
   void main() {
-    float t = uTime;
+    float t = uTime * 0.35; // calm, slow swell
     vec2 p = vWorld.xz;
 
-    // Glossy ocean: analytic wave normals, sky reflection, sun glint.
+    // Glossy ocean: gentle analytic wave normals and a sky reflection — no glints or streaks.
     float e = 0.04;
     float h0 = hgt(p, t);
     float hx = hgt(p + vec2(e, 0.0), t);
     float hz = hgt(p + vec2(0.0, e), t);
     vec3 n = normalize(vec3(-(hx - h0) / e * 0.05, 1.0, -(hz - h0) / e * 0.05));
     vec3 V = normalize(cameraPosition - vWorld);
-    // Sun sits behind the camera, so its mirror image never lands as one big smear —
-    // only steep wave facets catch it, which reads as glitter.
-    vec3 L = normalize(vec3(0.2, 0.9, 0.4));
-    float spec = pow(max(dot(n, normalize(L + V)), 0.0), 300.0);
     float fres = pow(1.0 - max(dot(n, V), 0.0), 5.0);
 
     float coast = texture2D(uCoast, vUv).r;
@@ -86,9 +94,6 @@ const surfaceFrag = /* glsl */ `
     ocean += vec3(0.02, 0.06, 0.16) * (h0 * 0.5 + 0.5) * 0.6;
     vec3 R = reflect(-V, n);
     ocean += mix(vec3(0.02, 0.05, 0.14), vec3(0.18, 0.36, 0.85), clamp(R.y, 0.0, 1.0)) * fres * 0.35;
-    ocean += vec3(0.75, 0.88, 1.0) * spec * 0.7;
-    float g = sin(p.x * 6.0 + t * 1.3 + sin(p.y * 3.1 - t) * 1.7) * sin(p.y * 5.3 - t * 1.1 + sin(p.x * 2.3 + t * 0.7) * 1.3);
-    ocean += vec3(0.3, 0.55, 1.0) * smoothstep(0.82, 1.0, g) * 0.18;
 
     // Land: a matrix of twinkling dots on a dark plate.
     vec2 gp = vUv * uGrid;
@@ -99,12 +104,28 @@ const surfaceFrag = /* glsl */ `
     float dotM = (1.0 - smoothstep(0.28 - aa, 0.28 + aa, d)) * step(0.5, landCell);
     // Far away a dot shrinks toward a pixel and rows alias into gaps — fade to its average coverage instead.
     float cellPx = max(fwidth(gp.x), fwidth(gp.y));
-    dotM = mix(dotM, landSoft * 0.25, smoothstep(0.12, 0.4, cellPx));
-    float tw = 0.7 + 0.3 * sin(t * 1.7 + cell.x * 0.71 + cell.y * 1.37);
-    float sweep = smoothstep(0.0, 0.6, sin(p.x * 0.25 - t * 0.35) * 0.5 + 0.5);
+    dotM = mix(dotM, landSoft * 0.25, smoothstep(0.07, 0.28, cellPx));
+    // Random phase per dot — a linear phase (x*a + y*b) lines up into diagonal stripes.
+    float phase = fract(sin(dot(cell, vec2(12.9898, 78.233))) * 43758.5453) * 6.2832;
+    // Twinkle only where dots are big enough to read; far away it would just be grain.
+    float tw = 0.7 + 0.3 * sin(uTime * 1.7 + phase) * (1.0 - smoothstep(0.07, 0.28, cellPx));
+
+    // A client country lights up as a whole territory, not a regional blob.
+    float hl = highlightAt(vUv);
+    float hlCell = highlightAt((cell + 0.5) / uGrid);
+    float pulse = 0.85 + 0.15 * sin(uTime * 2.2);
 
     vec3 col = mix(ocean, vec3(0.035, 0.08, 0.2) + ocean * 0.25, landSoft * 0.92);
-    col += vec3(0.45, 0.68, 1.0) * dotM * (tw * 1.1 + sweep * 0.25);
+    col += vec3(0.10, 0.28, 0.75) * hl * 0.55 * pulse;
+    col += vec3(0.45, 0.68, 1.0) * dotM * tw * 1.1;
+    col += vec3(0.55, 0.8, 1.0) * dotM * hlCell * 1.1 * pulse;
+
+    // Glowing white borders; fade with distance so thin lines never shimmer.
+    vec2 b = texture2D(uBorders, vUv).rg;
+    float far = smoothstep(0.35, 1.2, cellPx);
+    float borderLine = b.r * (1.0 - far * 0.7);
+    col += vec3(0.80, 0.90, 1.0) * borderLine * (0.45 + hl * 0.9);
+    col += vec3(0.30, 0.55, 1.0) * b.g * (0.30 + hl * 0.8);
 
     float fog = smoothstep(uFogNear, uFogFar, distance(vWorld, uFocus));
     // Dissolve the map's rectangular borders so the world floats in the dark.
@@ -236,6 +257,86 @@ async function buildLandTextures() {
   return { maskTex, coastTex };
 }
 
+// ---------- country borders + client-country id map ----------
+
+type Ring = number[][];
+
+/** Traces rings/lines in equirectangular space, breaking at antimeridian jumps (see above). */
+function traceRings(ctx: CanvasRenderingContext2D, rings: Ring[], w: number, h: number, close: boolean) {
+  for (const ring of rings) {
+    let prevLon = 0;
+    ring.forEach(([lon, lat], i) => {
+      const x = ((lon + 180) / 360) * w;
+      const y = ((90 - lat) / 180) * h;
+      if (i === 0 || Math.abs(lon - prevLon) > 180) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+      prevLon = lon;
+    });
+    if (close) ctx.closePath();
+  }
+}
+
+// ISO 3166 numeric ids, in COUNTRY_PINS order.
+const ISO_NUMERIC: Record<string, string> = { UZ: "860", MD: "498", GB: "826", US: "840" };
+
+async function buildCountryTextures(borderW: number) {
+  const res = await fetch("/data/countries-110m.json");
+  const topo = (await res.json()) as Topology<{ countries: GeometryCollection }>;
+  const borderH = borderW / 2;
+
+  // Borders: soft blue-white glow (g) under a crisp line (r), added together.
+  const bc = document.createElement("canvas");
+  bc.width = borderW;
+  bc.height = borderH;
+  const b = bc.getContext("2d")!;
+  b.fillStyle = "#000";
+  b.fillRect(0, 0, borderW, borderH);
+  b.globalCompositeOperation = "lighter";
+  const lines = mesh(topo, topo.objects.countries).coordinates as Ring[];
+  const scale = borderW / 4096;
+  b.filter = `blur(${6 * scale}px)`;
+  b.strokeStyle = "rgb(0,255,0)";
+  b.lineWidth = 5 * scale;
+  b.beginPath();
+  traceRings(b, lines, borderW, borderH, false);
+  b.stroke();
+  b.filter = "none";
+  b.strokeStyle = "rgb(255,0,0)";
+  b.lineWidth = Math.max(1, 1.4 * scale);
+  b.beginPath();
+  traceRings(b, lines, borderW, borderH, false);
+  b.stroke();
+
+  // Id map: each client country filled with a distinct grey level (60, 120, 180, 240).
+  const ic = document.createElement("canvas");
+  ic.width = MASK_W;
+  ic.height = MASK_H;
+  const c = ic.getContext("2d")!;
+  c.fillStyle = "#000";
+  c.fillRect(0, 0, MASK_W, MASK_H);
+  const countries = feature(topo, topo.objects.countries);
+  COUNTRY_PINS.forEach((pin, i) => {
+    const f = countries.features.find((x) => String(x.id) === ISO_NUMERIC[pin.code]);
+    if (!f) return;
+    const geom = f.geometry as Polygon | MultiPolygon;
+    const polygons = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
+    const v = (i + 1) * 60;
+    c.fillStyle = `rgb(${v},${v},${v})`;
+    c.beginPath();
+    for (const poly of polygons) traceRings(c, poly as Ring[], MASK_W, MASK_H, true);
+    c.fill("evenodd");
+  });
+
+  const borderTex = new THREE.CanvasTexture(bc);
+  borderTex.minFilter = THREE.LinearFilter;
+  borderTex.generateMipmaps = false;
+  const idTex = new THREE.CanvasTexture(ic);
+  idTex.minFilter = THREE.NearestFilter;
+  idTex.magFilter = THREE.NearestFilter;
+  idTex.generateMipmaps = false;
+  return { borderTex, idTex };
+}
+
 function flareTexture() {
   const c = document.createElement("canvas");
   c.width = c.height = 64;
@@ -331,6 +432,9 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
       uFogFar: { value: 30 },
       uBg: { value: BG_SRGB },
       uReady: { value: 0 },
+      uBorders: { value: null as THREE.Texture | null },
+      uCountryId: { value: null as THREE.Texture | null },
+      uHighlight: { value: new THREE.Vector4() },
     };
     const surface = new THREE.Mesh(
       track(new THREE.PlaneGeometry(MAP_W, MAP_H, 1, 1)),
@@ -347,6 +451,15 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
         track(coastTex);
         surfaceUniforms.uMask.value = maskTex;
         surfaceUniforms.uCoast.value = coastTex;
+      })
+      .catch(() => {});
+    buildCountryTextures(touch ? 2048 : 4096)
+      .then(({ borderTex, idTex }) => {
+        if (disposed) return borderTex.dispose(), idTex.dispose();
+        track(borderTex);
+        track(idTex);
+        surfaceUniforms.uBorders.value = borderTex;
+        surfaceUniforms.uCountryId.value = idTex;
       })
       .catch(() => {});
 
@@ -393,7 +506,8 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
       const disc = new THREE.Mesh(discGeom, discMat);
       disc.rotation.x = -Math.PI / 2;
       disc.position.y = 0.01;
-      disc.scale.setScalar(2.6);
+      // Small enough to sit inside the country — the territory itself carries the glow.
+      disc.scale.setScalar(1.1);
 
       const sprite = new THREE.Sprite(
         track(new THREE.SpriteMaterial({ map: flare, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0 }))
@@ -522,6 +636,7 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
           m.uniforms.uTime.value = elapsed + i * 0.4;
         }
         pin.discMat.uniforms.uIntensity.value = g;
+        surfaceUniforms.uHighlight.value.setComponent(i, g);
         pin.discMat.uniforms.uTime.value = elapsed + i * 0.3;
         pin.sprite.position.y = h;
         pin.sprite.material.opacity = g;

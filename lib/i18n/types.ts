@@ -46,7 +46,7 @@ export interface Dictionary {
   };
   clients: {
     countLabel: string;
-    dragHint: string;
+    allLabel: string;
   };
   worldMap: {
     eyebrow: string;

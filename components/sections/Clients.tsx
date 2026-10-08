@@ -1,189 +1,160 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { LayoutGroup, motion, useInView } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { CLIENTS } from "@/lib/clients";
+import { CLIENTS, clientsIn, type CountryCode } from "@/lib/clients";
 import { FLAGS } from "@/components/ui/Flags";
+import { cn } from "@/lib/utils";
 
-const REVOLUTION_MS = 48000; // one calm, constant lap for every logo
-const TAU = Math.PI * 2;
+const CYCLE_MS = 3200;
+const RESUME_AFTER_MS = 12000;
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+// Tabs: everyone first, then countries by number of clients.
+const COUNTRIES: CountryCode[] = (["UZ", "GB", "US", "MD"] as CountryCode[]).sort(
+  (a, b) => clientsIn(b).length - clientsIn(a).length
+);
+type Filter = CountryCode | "ALL";
+const FILTERS: Filter[] = ["ALL", ...COUNTRIES];
 
 /**
- * All clients ride one tilted 3D ring around the headline number. Every logo moves
- * at the same steady pace; the front of the ring passes in front of the number,
- * the back passes behind it. Scroll only tilts the ring — it never changes speed.
- * The ring can be spun by dragging; the spin eases back to the steady pace.
+ * A case wall: every client is always visible with its logo, name and country.
+ * Country tabs cycle on their own — the chosen country's cards shuffle to the
+ * front and light up, so a visitor sees the geography without waiting for anything.
  */
 export function Clients() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const tilt = useTransform(scrollYProgress, [0, 1], [0.2, 0.42]);
-  const numberY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const wallRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wallRef, { margin: "-15% 0px" });
+  const [filter, setFilter] = useState<Filter>("ALL");
+  const [manual, setManual] = useState(false); // a visitor picked a tab — hold it for a while
 
   useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const n = CLIENTS.length;
+    if (manual || !inView || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => {
+      setFilter((f) => FILTERS[(FILTERS.indexOf(f) + 1) % FILTERS.length]);
+    }, CYCLE_MS);
+    return () => window.clearTimeout(id);
+  }, [filter, inView, manual]);
 
-    let width = stage.clientWidth;
-    const ro = new ResizeObserver(() => (width = stage.clientWidth));
-    ro.observe(stage);
+  useEffect(() => {
+    if (!manual) return;
+    const id = window.setTimeout(() => setManual(false), RESUME_AFTER_MS);
+    return () => window.clearTimeout(id);
+  }, [manual, filter]);
 
-    let angle = 0;
-    let extra = 0; // drag-imparted angular velocity (rad/s), decays to 0
-    let dragging = false;
-    let lastX = 0;
-    let lastT = 0;
+  const choose = (f: Filter) => {
+    setFilter(f);
+    setManual(true);
+  };
 
-    const onDown = (e: PointerEvent) => {
-      dragging = true;
-      lastX = e.clientX;
-      lastT = performance.now();
-      stage.setPointerCapture(e.pointerId);
-    };
-    const onMove = (e: PointerEvent) => {
-      if (!dragging) return;
-      const now = performance.now();
-      const dx = e.clientX - lastX;
-      const rx = Math.max(width * 0.42, 1);
-      angle += dx / rx;
-      extra = (dx / rx) / Math.max((now - lastT) / 1000, 0.008);
-      lastX = e.clientX;
-      lastT = now;
-    };
-    const onUp = () => (dragging = false);
-    stage.addEventListener("pointerdown", onDown);
-    stage.addEventListener("pointermove", onMove);
-    stage.addEventListener("pointerup", onUp);
-    stage.addEventListener("pointercancel", onUp);
-
-    let visible = true;
-    const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
-    io.observe(stage);
-
-    let frame = 0;
-    let last = performance.now();
-    const loop = (now: number) => {
-      frame = requestAnimationFrame(loop);
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      if (!visible || document.hidden) return;
-
-      if (!dragging) {
-        if (!reduceMotion) angle += (TAU / (REVOLUTION_MS / 1000)) * dt;
-        angle += extra * dt;
-        extra *= Math.pow(0.04, dt); // ease the fling back to the steady pace
-      }
-
-      const mobile = width < 640;
-      const rx = mobile ? width / 2 - 34 : Math.min(width * 0.44, 520);
-      const ry = rx * tilt.get() * (mobile ? 1.15 : 1);
-      if (trackRef.current) {
-        trackRef.current.style.width = `${rx * 2}px`;
-        trackRef.current.style.height = `${ry * 2}px`;
-      }
-
-      // Only the single logo nearest the front shows its name, so labels never collide.
-      let front = 0;
-      let frontDepth = -1;
-      for (let i = 0; i < n; i++) {
-        const d = (Math.cos(angle + (i / n) * TAU) + 1) / 2;
-        if (d > frontDepth) (frontDepth = d), (front = i);
-      }
-
-      for (let i = 0; i < n; i++) {
-        const el = itemRefs.current[i];
-        if (!el) continue;
-        const a = angle + (i / n) * TAU;
-        const depth = (Math.cos(a) + 1) / 2; // 1 = front, 0 = back
-        const x = Math.sin(a) * rx;
-        const y = Math.cos(a) * ry;
-        const scale = 0.5 + 0.5 * depth;
-        el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
-        el.style.opacity = String(0.25 + 0.75 * depth);
-        el.style.zIndex = String(depth > 0.5 ? 20 + Math.round(depth * 10) : Math.round(depth * 10));
-        const label = labelRefs.current[i];
-        if (label) label.style.opacity = i === front ? String(Math.max(0, (depth - 0.9) / 0.1)) : "0";
-      }
-    };
-    frame = requestAnimationFrame(loop);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      ro.disconnect();
-      io.disconnect();
-      stage.removeEventListener("pointerdown", onDown);
-      stage.removeEventListener("pointermove", onMove);
-      stage.removeEventListener("pointerup", onUp);
-      stage.removeEventListener("pointercancel", onUp);
-    };
-  }, [tilt]);
+  // Selected country's clients move to the front; everyone else keeps their order.
+  const ordered = useMemo(
+    () => (filter === "ALL" ? CLIENTS : [...clientsIn(filter), ...CLIENTS.filter((c) => c.country !== filter)]),
+    [filter]
+  );
+  const auto = !manual;
 
   return (
-    <section ref={sectionRef} className="relative py-16 md:py-28 overflow-hidden">
-      <div
-        ref={stageRef}
-        className="relative mx-auto h-[300px] md:h-[500px] max-w-6xl cursor-grab select-none touch-pan-y active:cursor-grabbing"
-      >
-        {/* Ring track */}
-        <div
-          ref={trackRef}
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-accent/20 shadow-[0_0_40px_rgba(47,123,246,0.12)_inset]"
-        />
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 md:h-96 md:w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(47,123,246,0.18),transparent_65%)]" />
-
-        {/* Headline number sits between the back and the front of the ring */}
+    <section className="relative py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
         <motion.div
-          style={{ y: numberY }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-[15] w-[70%] max-w-md -translate-x-1/2 -translate-y-1/2 text-center"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="flex flex-col items-center gap-3 text-center md:flex-row md:items-end md:justify-center md:gap-6 md:text-left"
         >
-          <div className="font-display text-7xl md:text-[9rem] leading-none text-accent drop-shadow-[0_10px_40px_rgba(47,123,246,0.35)]">
-            {CLIENTS.length}
-          </div>
+          <span className="font-display text-7xl md:text-8xl leading-none text-accent">{CLIENTS.length}</span>
+          <span className="max-w-xs font-display text-xl md:text-2xl leading-snug md:pb-2">{t.clients.countLabel}</span>
         </motion.div>
 
-        {CLIENTS.map((client, i) => {
-          const Flag = FLAGS[client.country];
-          return (
-            <div
-              key={client.name}
-              ref={(el) => {
-                itemRefs.current[i] = el;
-              }}
-              className="absolute left-1/2 top-1/2 flex flex-col items-center will-change-transform"
-              style={{ opacity: 0 }}
-            >
-              <div className="h-14 w-14 md:h-24 md:w-24 overflow-hidden rounded-full border-2 border-white bg-white shadow-[0_12px_30px_-8px_rgba(15,23,42,0.35)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={client.src} alt={client.name} draggable={false} className="h-full w-full object-cover" />
-              </div>
-              <div
-                ref={(el) => {
-                  labelRefs.current[i] = el;
-                }}
-                className="mt-2 flex items-center gap-1 whitespace-nowrap rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] md:text-sm font-bold shadow-sm"
-                style={{ opacity: 0 }}
-              >
-                <Flag className="h-2.5 w-4 rounded-[1px]" />
-                {client.name}
-              </div>
-            </div>
-          );
-        })}
+        {/* Country tabs */}
+        <div className="mt-10 -mx-4 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:px-0">
+          <div className="mx-auto flex w-max gap-2 md:gap-3">
+            {FILTERS.map((f) => {
+              const active = f === filter;
+              const count = f === "ALL" ? CLIENTS.length : clientsIn(f).length;
+              const Flag = f === "ALL" ? null : FLAGS[f];
+              return (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => choose(f)}
+                  aria-pressed={active}
+                  className={cn(
+                    "relative flex items-center gap-2 overflow-hidden rounded-full border px-4 py-2 text-sm font-semibold transition-colors duration-300",
+                    active
+                      ? "border-accent bg-accent text-white shadow-[0_8px_24px_-6px_rgba(47,123,246,0.6)]"
+                      : "border-surface-border bg-white text-foreground hover:border-accent/40"
+                  )}
+                >
+                  {Flag && <Flag className="h-3 w-[18px] rounded-[2px]" />}
+                  <span className="whitespace-nowrap">{f === "ALL" ? t.clients.allLabel : t.worldMap.countries[f]}</span>
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 text-xs tabular-nums",
+                      active ? "bg-white/25" : "bg-accent-soft text-accent"
+                    )}
+                  >
+                    {count}
+                  </span>
+                  {/* Auto-cycle timer */}
+                  {active && auto && inView && (
+                    <span
+                      key={filter}
+                      aria-hidden
+                      className="tab-timer absolute bottom-0 left-0 h-[2px] bg-white/80"
+                      style={{ animationDuration: `${CYCLE_MS}ms` }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Case wall */}
+        <LayoutGroup>
+          <div ref={wallRef} className="mt-8 grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:gap-4 lg:grid-cols-5">
+            {ordered.map((client, i) => {
+              const Flag = FLAGS[client.country];
+              const lit = filter === "ALL" || client.country === filter;
+              return (
+                <motion.div
+                  key={client.name}
+                  layout
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ layout: { duration: 0.7, ease: EASE }, duration: 0.6, delay: (i % 5) * 0.06, ease: EASE }}
+                  className={cn(
+                    "group relative flex flex-col items-center overflow-hidden rounded-2xl border bg-white px-2 pb-3 pt-4 md:rounded-3xl md:px-4 md:pb-5 md:pt-6 text-center transition-[opacity,box-shadow,border-color,filter] duration-500",
+                    lit
+                      ? "border-surface-border shadow-[0_14px_40px_-18px_rgba(15,23,42,0.35)]"
+                      : "border-transparent opacity-35 grayscale",
+                    lit && filter !== "ALL" && "border-accent/50 shadow-[0_18px_50px_-16px_rgba(47,123,246,0.55)]"
+                  )}
+                >
+                  <span aria-hidden className="card-sheen pointer-events-none absolute inset-0" />
+                  <div className="h-12 w-12 md:h-20 md:w-20 overflow-hidden rounded-full border border-surface-border bg-white transition-transform duration-500 group-hover:scale-110">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={client.src} alt={client.name} loading="lazy" className="h-full w-full object-cover" />
+                  </div>
+                  <div className="mt-2.5 md:mt-4 w-full truncate text-[10px] md:text-sm font-bold tracking-tight">
+                    {client.name}
+                  </div>
+                  <div className="mt-1 flex items-center gap-1 text-[9px] md:text-xs text-muted">
+                    <Flag className="h-2 w-3 md:h-2.5 md:w-4 rounded-[1px]" />
+                    <span className="truncate">{t.worldMap.countries[client.country]}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </LayoutGroup>
       </div>
-      <p className="mx-auto mt-4 max-w-md px-6 text-center font-display text-lg md:text-2xl leading-snug">
-        {t.clients.countLabel}
-      </p>
-      <p className="mt-3 text-center text-xs uppercase tracking-[0.25em] text-muted/70">↔ {t.clients.dragHint}</p>
     </section>
   );
 }

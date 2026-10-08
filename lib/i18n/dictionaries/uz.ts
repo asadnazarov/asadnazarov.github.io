@@ -78,7 +78,7 @@ export const uz: Dictionary = {
   },
   clients: {
     countLabel: "kompaniya o'z jarayonlarini menga ishonib topshirdi",
-    dragHint: "Aylantiring",
+    allLabel: "Barchasi",
   },
   worldMap: {
     eyebrow: "Geografiya",
