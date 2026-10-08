@@ -23,8 +23,8 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function WorldMap() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const stageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: stageRef, offset: ["start start", "end end"] });
   const [stage, setStage] = useState(-1);
   useMotionValueEvent(scrollYProgress, "change", (v) => setStage(stageAt(v)));
 
@@ -39,10 +39,10 @@ export function WorldMap() {
   const summary = stage === COUNTRY_PINS.length;
 
   return (
-    <section id="projects" ref={sectionRef} className="relative h-[520vh] bg-[#040b1f]">
-      {/* Dusk fade: the light page darkens into the map stage and back. */}
-      <div className="pointer-events-none absolute inset-x-0 -top-48 h-48 bg-gradient-to-b from-transparent to-[#040b1f]" />
-      <div className="pointer-events-none absolute inset-x-0 -bottom-48 z-10 h-48 bg-gradient-to-b from-[#040b1f] to-transparent" />
+    <section id="projects" className="relative">
+      {/* Dusk: a long eased gradient so the light page sinks into night instead of meeting it at an edge. */}
+      <div aria-hidden className="dusk-in pointer-events-none h-[45vh] md:h-[55vh]" />
+      <div ref={stageRef} data-dark-stage className="relative h-[520vh] bg-[#040b1f]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <WorldMapCanvas progress={scrollYProgress} className="absolute inset-0" />
 
@@ -79,7 +79,7 @@ export function WorldMap() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
                 transition={{ duration: 0.55, ease: EASE }}
-                className="max-w-md rounded-3xl border border-white/10 bg-white/[0.06] p-5 md:p-6 text-white shadow-[0_20px_80px_rgba(20,80,255,0.25)] backdrop-blur-xl"
+                className="max-w-md rounded-3xl border border-white/10 bg-[#0b1736]/90 md:bg-white/[0.06] p-5 md:p-6 text-white shadow-[0_20px_80px_rgba(20,80,255,0.25)] md:backdrop-blur-xl"
               >
                 <div className="flex items-center gap-3">
                   {(() => {
@@ -167,6 +167,9 @@ export function WorldMap() {
           </div>
         </div>
       </div>
+      </div>
+      {/* Dawn: night lifts back into the light page. */}
+      <div aria-hidden className="dusk-out pointer-events-none h-[45vh] md:h-[55vh]" />
     </section>
   );
 }

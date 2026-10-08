@@ -58,6 +58,8 @@ export function Process() {
   const eased = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.4 });
   const x = useTransform(eased, (v) => -v * distance);
   const bar = useTransform(eased, [0, 1], ["0%", "100%"]);
+  // The progress line only exists while the section is pinned — otherwise it reads as a stray rule mid-page.
+  const barOpacity = useTransform(scrollYProgress, (v) => Math.min(v * 25, (1 - v) * 25, 1));
 
   return (
     <section
@@ -66,17 +68,17 @@ export function Process() {
       className="relative"
       style={{ height: distance ? `calc(100svh + ${distance}px)` : undefined }}
     >
-      <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
-        <DotField className="absolute inset-0 -z-10 opacity-60" />
+      <div className="sticky top-0 flex h-[100svh] flex-col justify-start pt-28 md:justify-center md:pt-0 overflow-hidden">
+        <DotField className="absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(transparent,black_20%,black_80%,transparent)]" />
 
-        <div className="absolute left-6 right-6 top-20 md:top-24 mx-auto max-w-6xl">
+        <motion.div style={{ opacity: barOpacity }} className="absolute left-6 right-6 top-20 md:top-24 mx-auto max-w-6xl">
           <div className="h-px w-full bg-surface-border">
             <motion.div style={{ width: bar }} className="h-px bg-accent shadow-[0_0_12px_var(--accent)]" />
           </div>
-        </div>
+        </motion.div>
 
         <motion.div ref={trackRef} style={{ x }} className="flex w-max items-stretch gap-6 md:gap-10 px-6 md:px-[8vw] will-change-transform">
-          <div className="flex w-[85vw] md:w-[38vw] shrink-0 flex-col justify-center">
+          <div className="flex w-[85vw] md:w-[38vw] shrink-0 flex-col justify-start md:justify-center">
             <SectionHeading eyebrow={t.process.eyebrow} heading={t.process.heading} subhead={t.process.subhead} />
             <div className="mt-8 hidden md:flex items-center gap-3 text-sm text-muted">
               <span className="inline-block h-px w-10 bg-accent" />
@@ -87,10 +89,10 @@ export function Process() {
           {t.process.steps.map((step, i) => (
             <div
               key={step.title}
-              className="group relative w-[85vw] md:w-[30rem] shrink-0 overflow-hidden rounded-[2rem] border border-surface-border bg-white/75 p-7 md:p-10 shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-colors duration-500 hover:border-accent/40"
+              className="group relative w-[85vw] md:w-[30rem] shrink-0 overflow-hidden rounded-[2rem] border border-surface-border bg-white/95 md:bg-white/75 p-7 md:p-10 shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] md:backdrop-blur-xl transition-colors duration-500 hover:border-accent/40"
             >
               <StepNumber n={i} progress={eased} />
-              <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-60" />
+              <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(47,123,246,0.16),transparent_65%)] transition-opacity duration-500 group-hover:opacity-100 opacity-60" />
               <div className="relative">
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-white shadow-lg shadow-accent/30">
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">

@@ -16,7 +16,7 @@ export function Header() {
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
       // Switch to a dark glass while the night-time map stage is under the header.
-      const map = document.getElementById("projects")?.getBoundingClientRect();
+      const map = document.querySelector("[data-dark-stage]")?.getBoundingClientRect();
       setOverDark(!!map && map.top <= 40 && map.bottom >= 40);
     };
     onScroll();
@@ -36,7 +36,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto max-w-6xl px-6 h-16 md:h-20 flex items-center justify-between">
-        <a href="#top" className="font-display text-sm tracking-widest uppercase">
+        <a href="#top" className="font-display text-[11px] sm:text-sm tracking-[0.15em] sm:tracking-widest uppercase whitespace-nowrap">
           {SITE_NAME}
         </a>
 

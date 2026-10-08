@@ -52,11 +52,11 @@ body {
 }
 
 /* ---------- ambient aurora ---------- */
+/* Radial gradients are already soft-edged — no filter: blur(), which is very costly on phones. */
 .aurora-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.55;
+  opacity: 0.6;
   will-change: transform;
 }
 .aurora-a {
@@ -99,37 +99,46 @@ body {
   }
 }
 
-/* Animated gradient text for accent words */
-.text-shimmer {
-  background: linear-gradient(110deg, #2f7bf6 0%, #2f7bf6 35%, #9cc2ff 50%, #2f7bf6 65%, #2f7bf6 100%);
-  background-size: 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 5s linear infinite;
+/* Eased (non-linear) stops avoid the visible band a plain two-stop gradient leaves. */
+.dusk-in {
+  background: linear-gradient(
+    to bottom,
+    rgba(214, 228, 255, 0) 0%,
+    rgba(196, 216, 255, 0.45) 18%,
+    rgba(120, 162, 240, 0.7) 36%,
+    rgba(47, 98, 205, 0.85) 52%,
+    rgba(20, 50, 125, 0.94) 68%,
+    rgba(8, 22, 60, 0.98) 84%,
+    #040b1f 100%
+  );
 }
-@keyframes shimmer {
-  from {
-    background-position: 100% 0;
-  }
-  to {
-    background-position: -150% 0;
-  }
+.dusk-out {
+  background: linear-gradient(
+    to top,
+    rgba(214, 228, 255, 0) 0%,
+    rgba(196, 216, 255, 0.45) 18%,
+    rgba(120, 162, 240, 0.7) 36%,
+    rgba(47, 98, 205, 0.85) 52%,
+    rgba(20, 50, 125, 0.94) 68%,
+    rgba(8, 22, 60, 0.98) 84%,
+    #040b1f 100%
+  );
 }
 
-/* Rotating conic ring around the portrait */
-.portrait-ring {
-  background: conic-gradient(from var(--angle, 0deg), #2f7bf6, #9cc2ff, transparent 40%, #2f7bf6 70%, #2f7bf6);
-  animation: spin-ring 6s linear infinite;
+/* A wave of light that runs letter by letter through accent words */
+.shimmer-letter {
+  animation: letter-shimmer 4.5s ease-in-out infinite;
 }
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes spin-ring {
-  to {
-    --angle: 360deg;
+@keyframes letter-shimmer {
+  0%,
+  12%,
+  100% {
+    color: var(--accent);
+    text-shadow: none;
+  }
+  6% {
+    color: #9cc2ff;
+    text-shadow: 0 0 18px rgba(47, 123, 246, 0.45);
   }
 }
 

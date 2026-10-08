@@ -310,7 +310,9 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
     } catch {
       return; // No WebGL — the section's dark gradient still reads fine.
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    // Phones have 3x screens but small GPUs: the ocean shader is per-pixel, so cap harder there.
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, touch ? 1.25 : 1.75));
     renderer.setClearColor(BG, 1);
 
     const scene = new THREE.Scene();
@@ -567,7 +569,7 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
               labelRefs.current[i] = el;
             }}
             aria-hidden
-            className="pointer-events-none absolute left-0 top-0 flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-xs font-semibold text-white shadow-[0_0_24px_rgba(59,134,255,0.45)] backdrop-blur-md will-change-transform"
+            className="pointer-events-none absolute left-0 top-0 flex items-center gap-1.5 rounded-full border border-white/15 bg-[#0b1a3d]/85 px-2.5 py-1 text-xs font-semibold text-white shadow-[0_0_24px_rgba(59,134,255,0.45)] will-change-transform"
             style={{ opacity: 0 }}
           >
             <Flag className="h-2.5 w-4 rounded-[1px]" />

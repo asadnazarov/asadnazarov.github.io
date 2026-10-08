@@ -9,7 +9,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-surface-border">
+    <footer className="relative">
+      {/* Soft fading rule instead of a hard full-width border. */}
+      <div aria-hidden className="mx-auto h-px max-w-6xl bg-gradient-to-r from-transparent via-accent/25 to-transparent" />
       <div className="mx-auto max-w-6xl px-6 py-16 grid gap-12 md:grid-cols-3">
         <div>
           <div className="font-display text-sm tracking-widest uppercase mb-4">{SITE_NAME}</div>

@@ -42,16 +42,12 @@ export function About() {
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[auto_1.4fr_1fr] lg:items-start">
           <FadeIn className="flex justify-center lg:block">
-            <div className="relative h-32 w-32 lg:h-40 lg:w-40">
-              <div className="portrait-ring absolute -inset-1.5 rounded-full opacity-80 blur-[2px]" />
-              <div className="absolute -inset-6 rounded-full bg-accent/20 blur-2xl" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/asad.jpg"
-                alt="Асад Назаров"
-                className="relative h-full w-full rounded-full border-4 border-white object-cover"
-              />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/asad-hq.jpg"
+              alt="Асад Назаров"
+              className="h-28 w-28 lg:h-32 lg:w-32 rounded-full object-cover shadow-md shadow-accent/20"
+            />
           </FadeIn>
 
           <div className="space-y-5">

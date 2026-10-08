@@ -46,7 +46,7 @@ function FanCard({ item, index, count, progress, fan }: FanCardProps) {
 
   return (
     <motion.div style={{ x, rotate, y, opacity, zIndex: count - Math.abs(Math.round(fromCenter)) }} className="relative">
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-surface-border bg-white/80 p-7 md:p-8 shadow-[0_25px_60px_-20px_rgba(15,23,42,0.2)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-accent/40">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-surface-border bg-white/95 md:bg-white/80 p-7 md:p-8 shadow-[0_25px_60px_-20px_rgba(15,23,42,0.2)] md:backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-accent/40">
         <div aria-hidden className="absolute right-5 top-3 font-display text-[6rem] leading-[0.8] text-accent/10">
           &rdquo;
         </div>

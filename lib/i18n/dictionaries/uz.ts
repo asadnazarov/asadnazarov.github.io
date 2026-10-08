@@ -76,6 +76,10 @@ export const uz: Dictionary = {
     ctaText: "AI biznesingizga qanday yordam berishi mumkinligini bilishni xohlaysizmi?",
     ctaButton: "Bog'lanish",
   },
+  clients: {
+    countLabel: "kompaniya o'z jarayonlarini menga ishonib topshirdi",
+    dragHint: "Aylantiring",
+  },
   worldMap: {
     eyebrow: "Geografiya",
     heading: "Butun dunyo bo'ylab loyihalar",

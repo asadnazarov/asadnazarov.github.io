@@ -44,6 +44,10 @@ export interface Dictionary {
     ctaText: string;
     ctaButton: string;
   };
+  clients: {
+    countLabel: string;
+    dragHint: string;
+  };
   worldMap: {
     eyebrow: string;
     heading: string;

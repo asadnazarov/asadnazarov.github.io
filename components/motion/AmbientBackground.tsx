@@ -16,8 +16,6 @@ export function AmbientBackground() {
   const { scrollYProgress } = useScroll();
   const auroraY = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
   const gridY = useTransform(scrollYProgress, [0, 1], ["0px", "-600px"]);
-  const hue = useTransform(scrollYProgress, [0, 0.5, 1], [0, 18, -12]);
-  const filter = useTransform(hue, (h) => `hue-rotate(${h}deg)`);
 
   useEffect(() => {
     const el = spotRef.current;
@@ -40,7 +38,7 @@ export function AmbientBackground() {
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
-      <motion.div style={{ y: auroraY, filter }} className="absolute inset-0 h-[160%]">
+      <motion.div style={{ y: auroraY }} className="absolute inset-0 h-[160%]">
         <div className="aurora-blob aurora-a" />
         <div className="aurora-blob aurora-b" />
         <div className="aurora-blob aurora-c" />
@@ -60,7 +58,7 @@ export function AmbientBackground() {
         }}
       />
 
-      <div className="absolute inset-0 opacity-[0.05] mix-blend-multiply" style={{ backgroundImage: GRAIN }} />
+      <div className="absolute inset-0 hidden opacity-[0.035] md:block" style={{ backgroundImage: GRAIN }} />
     </div>
   );
 }

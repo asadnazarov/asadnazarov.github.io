@@ -76,6 +76,10 @@ export const ru: Dictionary = {
     ctaText: "Готовы узнать, как ИИ может помочь вашему бизнесу?",
     ctaButton: "Связаться",
   },
+  clients: {
+    countLabel: "компаний доверили мне свои процессы",
+    dragHint: "Покрутите",
+  },
   worldMap: {
     eyebrow: "География",
     heading: "Проекты по всему миру",
