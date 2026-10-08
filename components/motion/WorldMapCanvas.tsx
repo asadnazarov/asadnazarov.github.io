@@ -411,9 +411,13 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
     } catch {
       return; // No WebGL — the section's dark gradient still reads fine.
     }
-    // Phones have 3x screens but small GPUs: the ocean shader is per-pixel, so cap harder there.
+    // Phones render at their real (HD) density; if a weak GPU can't keep up, the loop
+    // below steps the ratio down instead of letting the map stutter. Desktop is fixed.
     const touch = window.matchMedia("(pointer: coarse)").matches;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, touch ? 1.25 : 1.75));
+    const dpr = window.devicePixelRatio || 1;
+    let pixelRatio = Math.min(dpr, touch ? 2.5 : 1.75);
+    const MIN_TOUCH_RATIO = Math.min(dpr, 1.5);
+    renderer.setPixelRatio(pixelRatio);
     renderer.setClearColor(BG, 1);
 
     const scene = new THREE.Scene();
@@ -453,7 +457,8 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
         surfaceUniforms.uCoast.value = coastTex;
       })
       .catch(() => {});
-    buildCountryTextures(touch ? 2048 : 4096)
+    // Same crisp 4096 borders as desktop wherever the GPU allows it.
+    buildCountryTextures(renderer.capabilities.maxTextureSize >= 4096 ? 4096 : 2048)
       .then(({ borderTex, idTex }) => {
         if (disposed) return borderTex.dispose(), idTex.dispose();
         track(borderTex);
@@ -583,12 +588,30 @@ export default function WorldMapCanvas({ progress, className }: WorldMapCanvasPr
     let elapsed = 0;
     let smoothProgress = progress.get();
 
+    const perf = { time: 0, frames: 0 };
+
     function loop(now: number) {
       frame = 0;
       if (disposed || !visible) return;
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
       if (!reduceMotion) elapsed += dt;
+
+      // Phone safety net: average ~2s of frames; under ~40 fps, drop resolution one step.
+      // One-off long frames (texture upload, returning to the tab) are ignored.
+      if (touch && pixelRatio > MIN_TOUCH_RATIO && dt < 0.09) {
+        perf.time += dt;
+        perf.frames += 1;
+        if (perf.frames >= 120) {
+          if (perf.time / perf.frames > 1 / 40) {
+            pixelRatio = Math.max(MIN_TOUCH_RATIO, pixelRatio - 0.5);
+            renderer.setPixelRatio(pixelRatio);
+            resize();
+          }
+          perf.time = 0;
+          perf.frames = 0;
+        }
+      }
 
       smoothProgress += (progress.get() - smoothProgress) * Math.min(1, dt * 6);
       const route = routeAt(smoothProgress);
