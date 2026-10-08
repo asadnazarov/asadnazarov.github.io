@@ -10,6 +10,7 @@ export const uz: Dictionary = {
     items: [
       { label: "Men haqimda", href: "#about" },
       { label: "Qanday ishlayman", href: "#process" },
+      { label: "Loyihalar", href: "#projects" },
       { label: "Fikrlar", href: "#testimonials" },
     ],
     cta: "Bog'lanish",
@@ -21,7 +22,7 @@ export const uz: Dictionary = {
     subhead:
       "Biznesingiz jarayonlaridagi kundalik qiyinchiliklarni tayyor AI-yechimlarga aylantiraman — ular real ishlaydi va foyda keltiradi, sizga esa texnologiyani chuqur o'rganish shart emas.",
     cta: "Bog'lanish",
-    statProjectsValue: "10+",
+    statProjectsValue: "15+",
     statProjectsLabel: "loyiha",
     statCountries: "AQSH · Yevropa · O'zbekiston",
   },
@@ -74,6 +75,16 @@ export const uz: Dictionary = {
     ],
     ctaText: "AI biznesingizga qanday yordam berishi mumkinligini bilishni xohlaysizmi?",
     ctaButton: "Bog'lanish",
+  },
+  worldMap: {
+    eyebrow: "Geografiya",
+    heading: "Butun dunyo bo'ylab loyihalar",
+    subhead: "Toshkentdan — uch qit'adagi bizneslarga.",
+    countries: { UZ: "O'zbekiston", GB: "Buyuk Britaniya", US: "AQSH", MD: "Moldova" },
+    projectForms: ["ta loyiha", "ta loyiha", "ta loyiha"],
+    homeLabel: "Baza",
+    totalCountriesLabel: "davlat",
+    scrollHint: "Pastga suring — xarita harakatlanadi",
   },
   testimonials: {
     eyebrow: "Fikrlar",

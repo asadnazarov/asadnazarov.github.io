@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { Inter, Unbounded } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SITE_URL } from "@/lib/constants";
+import { AmbientBackground } from "@/components/motion/AmbientBackground";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,7 +45,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="ru"
       className={`${inter.variable} ${unbounded.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col text-foreground">
+        <AmbientBackground />
+        <SmoothScroll />
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

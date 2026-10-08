@@ -10,6 +10,7 @@ export const ru: Dictionary = {
     items: [
       { label: "Обо мне", href: "#about" },
       { label: "Как я работаю", href: "#process" },
+      { label: "Проекты", href: "#projects" },
       { label: "Отзывы", href: "#testimonials" },
     ],
     cta: "Связаться",
@@ -21,7 +22,7 @@ export const ru: Dictionary = {
     subhead:
       "Превращаю ежедневные узкие места в процессах вашего бизнеса в готовые AI-решения, которые реально работают и приносят прибыль — без необходимости самому разбираться в технологиях.",
     cta: "Связаться",
-    statProjectsValue: "10+",
+    statProjectsValue: "15+",
     statProjectsLabel: "проектов",
     statCountries: "США · Европа · Узбекистан",
   },
@@ -74,6 +75,16 @@ export const ru: Dictionary = {
     ],
     ctaText: "Готовы узнать, как ИИ может помочь вашему бизнесу?",
     ctaButton: "Связаться",
+  },
+  worldMap: {
+    eyebrow: "География",
+    heading: "Проекты по всему миру",
+    subhead: "Из Ташкента — к бизнесам на трёх континентах.",
+    countries: { UZ: "Узбекистан", GB: "Великобритания", US: "США", MD: "Молдова" },
+    projectForms: ["проект", "проекта", "проектов"],
+    homeLabel: "База",
+    totalCountriesLabel: "страны",
+    scrollHint: "Листайте — карта двинется",
   },
   testimonials: {
     eyebrow: "Отзывы",

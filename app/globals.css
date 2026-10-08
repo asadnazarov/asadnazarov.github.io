@@ -42,7 +42,6 @@ html {
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
@@ -52,17 +51,86 @@ body {
   color: var(--accent-foreground);
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
+/* ---------- ambient aurora ---------- */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora-a {
+  width: 55vw;
+  height: 55vw;
+  left: -12vw;
+  top: -10vw;
+  background: radial-gradient(circle, #9cc2ff 0%, transparent 65%);
+  animation: drift-a 26s ease-in-out infinite alternate;
+}
+.aurora-b {
+  width: 45vw;
+  height: 45vw;
+  right: -10vw;
+  top: 25%;
+  background: radial-gradient(circle, #c9dcff 0%, transparent 65%);
+  animation: drift-b 32s ease-in-out infinite alternate;
+}
+.aurora-c {
+  width: 60vw;
+  height: 60vw;
+  left: 20vw;
+  top: 60%;
+  background: radial-gradient(circle, #b4d0ff 0%, transparent 65%);
+  animation: drift-c 38s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
   to {
-    transform: translateX(-50%);
+    transform: translate(18vw, 12vh) scale(1.15);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate(-22vw, -8vh) scale(0.9);
+  }
+}
+@keyframes drift-c {
+  to {
+    transform: translate(-14vw, -18vh) scale(1.2);
   }
 }
 
-.marquee-track {
-  animation: marquee 42s linear infinite;
+/* Animated gradient text for accent words */
+.text-shimmer {
+  background: linear-gradient(110deg, #2f7bf6 0%, #2f7bf6 35%, #9cc2ff 50%, #2f7bf6 65%, #2f7bf6 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+/* Rotating conic ring around the portrait */
+.portrait-ring {
+  background: conic-gradient(from var(--angle, 0deg), #2f7bf6, #9cc2ff, transparent 40%, #2f7bf6 70%, #2f7bf6);
+  animation: spin-ring 6s linear infinite;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin-ring {
+  to {
+    --angle: 360deg;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -76,8 +144,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-  .marquee-track {
-    animation: none !important;
   }
 }

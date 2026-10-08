@@ -1,4 +1,5 @@
-import type { ReactElement } from "react";
+import type { ComponentType, ReactElement } from "react";
+import type { CountryCode } from "@/lib/clients";
 
 interface FlagProps {
   className?: string;
@@ -79,3 +80,10 @@ export function FlagMD({ className }: FlagProps) {
     </svg>
   );
 }
+
+export const FLAGS: Record<CountryCode, ComponentType<FlagProps>> = {
+  UZ: FlagUZ,
+  GB: FlagGB,
+  US: FlagUS,
+  MD: FlagMD,
+};

@@ -9,6 +9,7 @@ import type {
   SelectOption,
   Testimonial,
 } from "@/types";
+import type { CountryCode } from "@/lib/clients";
 
 export interface Dictionary {
   meta: {
@@ -42,6 +43,17 @@ export interface Dictionary {
     steps: ProcessStep[];
     ctaText: string;
     ctaButton: string;
+  };
+  worldMap: {
+    eyebrow: string;
+    heading: string;
+    subhead: string;
+    countries: Record<CountryCode, string>;
+    /** [one, few, many] — e.g. проект / проекта / проектов */
+    projectForms: [string, string, string];
+    homeLabel: string;
+    totalCountriesLabel: string;
+    scrollHint: string;
   };
   testimonials: {
     eyebrow: string;
