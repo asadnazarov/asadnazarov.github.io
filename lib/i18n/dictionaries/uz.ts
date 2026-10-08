@@ -77,9 +77,7 @@ export const uz: Dictionary = {
     ctaButton: "Bog'lanish",
   },
   clients: {
-    countLabel: "kompaniya o'z jarayonlarini menga ishonib topshirdi",
-    allLabel: "Barchasi",
-  },
+    countLabel: "kompaniya o'z jarayonlarini menga ishonib topshirdi",  },
   worldMap: {
     eyebrow: "Geografiya",
     heading: "Butun dunyo bo'ylab loyihalar",

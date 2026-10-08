@@ -77,9 +77,7 @@ export const ru: Dictionary = {
     ctaButton: "Связаться",
   },
   clients: {
-    countLabel: "компаний доверили мне свои процессы",
-    allLabel: "Все",
-  },
+    countLabel: "компаний доверили мне свои процессы",  },
   worldMap: {
     eyebrow: "География",
     heading: "Проекты по всему миру",

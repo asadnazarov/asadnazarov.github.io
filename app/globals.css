@@ -125,35 +125,21 @@ body {
   );
 }
 
-/* Client wall: timer line on the active country tab */
-.tab-timer {
-  animation-name: tab-timer;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
-@keyframes tab-timer {
+/* Client marquee: constant pace, independent of scroll. Duration is set from JS by width. */
+@keyframes marquee {
   from {
-    width: 0%;
+    transform: translate3d(0, 0, 0);
   }
   to {
-    width: 100%;
+    transform: translate3d(-50%, 0, 0);
   }
 }
-
-/* Client wall: a slow diagonal sheen that sweeps across each card */
-.card-sheen {
-  background: linear-gradient(115deg, transparent 35%, rgba(47, 123, 246, 0.08) 50%, transparent 65%);
-  background-size: 300% 100%;
-  animation: card-sheen 7s ease-in-out infinite;
+.marquee-track {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
 }
-@keyframes card-sheen {
-  0%,
-  60% {
-    background-position: 120% 0;
-  }
-  100% {
-    background-position: -120% 0;
-  }
+.marquee-reverse {
+  animation-direction: reverse;
 }
 
 /* A wave of light that runs letter by letter through accent words */
