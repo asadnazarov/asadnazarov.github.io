@@ -22,6 +22,7 @@ export function ConsultationForm() {
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ConsultationSchema>({
     resolver: zodResolver(consultationSchema),
@@ -101,13 +102,19 @@ export function ConsultationForm() {
         </FormField>
       </div>
 
-      <FormField label={t.form.emailLabel} htmlFor="email" error={validationMessage(errors.email?.message)}>
+      <FormField label={t.form.phoneLabel} htmlFor="phone" error={validationMessage(errors.phone?.message)}>
         <input
-          id="email"
-          type="email"
+          id="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
           className={inputClass}
-          placeholder={t.form.emailPlaceholder}
-          {...register("email")}
+          placeholder={t.form.phonePlaceholder}
+          // Start every number with "+" so the country code is never forgotten.
+          onFocus={(e) => {
+            if (!e.currentTarget.value) setValue("phone", "+");
+          }}
+          {...register("phone")}
         />
       </FormField>
 

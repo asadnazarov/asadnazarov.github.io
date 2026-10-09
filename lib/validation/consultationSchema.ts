@@ -28,7 +28,14 @@ const interests = [
 export const consultationSchema = z.object({
   firstName: z.string().trim().min(2, "firstNameRequired"),
   lastName: z.string().trim().min(2, "lastNameRequired"),
-  email: z.string().trim().email("emailInvalid"),
+  // International phone: "+" country code, then 7–15 digits (E.164), with common separators allowed.
+  phone: z
+    .string()
+    .trim()
+    .refine(
+      (val) => /^\+[\d\s\-().]+$/.test(val) && val.replace(/\D/g, "").length >= 7 && val.replace(/\D/g, "").length <= 15,
+      "phoneInvalid"
+    ),
   companyName: z.string().trim().min(2, "companyNameRequired"),
   companyWebsite: z
     .string()

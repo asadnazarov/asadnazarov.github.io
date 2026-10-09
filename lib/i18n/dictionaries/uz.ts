@@ -164,8 +164,8 @@ export const uz: Dictionary = {
     firstNamePlaceholder: "Aziz",
     lastNameLabel: "Familiya",
     lastNamePlaceholder: "Azizov",
-    emailLabel: "Email",
-    emailPlaceholder: "aziz@company.com",
+    phoneLabel: "Telefon raqami",
+    phonePlaceholder: "+998 90 123 45 67",
     companyNameLabel: "Kompaniya nomi",
     companyNamePlaceholder: "\"Namuna\" MChJ",
     companyWebsiteLabel: "Kompaniya sayti (majburiy emas)",
@@ -222,7 +222,7 @@ export const uz: Dictionary = {
     validation: {
       firstNameRequired: "Ismingizni kiriting",
       lastNameRequired: "Familiyangizni kiriting",
-      emailInvalid: "To'g'ri email kiriting",
+      phoneInvalid: "Raqamni xalqaro formatda kiriting, masalan +998 90 123 45 67",
       companyNameRequired: "Kompaniya nomini kiriting",
       companyWebsiteInvalid: "To'g'ri sayt manzilini kiriting",
       roleRequired: "Rolingizni tanlang",
@@ -245,7 +245,7 @@ export const uz: Dictionary = {
   legal: {
     privacyTitle: "Maxfiylik siyosati",
     privacyBody: [
-      "Ariza formasida ko'rsatgan ma'lumotlaringiz (ism, email, kompaniya haqida ma'lumot) faqat konsultatsiya bo'yicha siz bilan bog'lanish uchun ishlatiladi.",
+      "Ariza formasida ko'rsatgan ma'lumotlaringiz (ism, telefon raqami, kompaniya haqida ma'lumot) faqat konsultatsiya bo'yicha siz bilan bog'lanish uchun ishlatiladi.",
       "Biz bu ma'lumotlarni bazada yoki CRM'da saqlamaymiz — ariza to'g'ridan-to'g'ri Telegram'ga yuboriladi va so'rovingizga javob berish uchun bir marta ishlatiladi.",
       "Ma'lumotlaringizni uchinchi shaxslarga bermaymiz va marketing xabarlari uchun ishlatmaymiz.",
       "Ma'lumotlarni qayta ishlash bo'yicha savollaringiz bo'lsa — sayt footerida ko'rsatilgan pochta yoki Telegram orqali yozing.",

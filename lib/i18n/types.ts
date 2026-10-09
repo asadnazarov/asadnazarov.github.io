@@ -80,8 +80,8 @@ export interface Dictionary {
     firstNamePlaceholder: string;
     lastNameLabel: string;
     lastNamePlaceholder: string;
-    emailLabel: string;
-    emailPlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
     companyNameLabel: string;
     companyNamePlaceholder: string;
     companyWebsiteLabel: string;
@@ -109,7 +109,7 @@ export interface Dictionary {
     validation: {
       firstNameRequired: string;
       lastNameRequired: string;
-      emailInvalid: string;
+      phoneInvalid: string;
       companyNameRequired: string;
       companyWebsiteInvalid: string;
       roleRequired: string;

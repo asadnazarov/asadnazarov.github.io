@@ -48,7 +48,7 @@ export interface SelectOption<T extends string = string> {
 export interface ConsultationFormValues {
   firstName: string;
   lastName: string;
-  email: string;
+  phone: string;
   companyName: string;
   companyWebsite?: string;
   role: Role;

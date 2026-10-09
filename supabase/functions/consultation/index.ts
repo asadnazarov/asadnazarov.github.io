@@ -16,7 +16,7 @@ type Interest = "leads_sales" | "customer_support" | "internal_ops" | "data_repo
 interface ConsultationPayload {
   firstName: string;
   lastName: string;
-  email: string;
+  phone: string;
   companyName: string;
   companyWebsite?: string;
   role: Role;
@@ -73,8 +73,13 @@ function validate(
   const lastName = typeof data.lastName === "string" ? data.lastName.trim() : "";
   if (lastName.length < 2) errors.push({ field: "lastName", message: "lastNameRequired" });
 
-  const email = typeof data.email === "string" ? data.email.trim() : "";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push({ field: "email", message: "emailInvalid" });
+  // International phone: "+" country code, 7–15 digits. Only digits and "+ - ( ) ." are allowed,
+  // which also keeps the value safe to drop into the Markdown Telegram message.
+  const phone = typeof data.phone === "string" ? data.phone.trim() : "";
+  const phoneDigits = phone.replace(/\D/g, "");
+  if (!/^\+[\d\s\-().]+$/.test(phone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+    errors.push({ field: "phone", message: "phoneInvalid" });
+  }
 
   const companyName = typeof data.companyName === "string" ? data.companyName.trim() : "";
   if (companyName.length < 2) errors.push({ field: "companyName", message: "companyNameRequired" });
@@ -110,7 +115,7 @@ function validate(
   return {
     ok: true,
     value: {
-      firstName, lastName, email, companyName, companyWebsite, role, companySize,
+      firstName, lastName, phone, companyName, companyWebsite, role, companySize,
       annualRevenue, howCanWeHelp, interests, additionalInfo, locale,
     },
   };
@@ -124,7 +129,7 @@ function formatMessage(data: ConsultationPayload) {
     "🆕 *Новая заявка на бесплатную консультацию*",
     "",
     `👤 *Имя:* ${data.firstName} ${data.lastName}`,
-    `📧 *Email:* ${data.email}`,
+    `📞 *Телефон:* ${data.phone}`,
     `🏢 *Компания:* ${data.companyName}`,
     `🌐 *Сайт компании:* ${data.companyWebsite || "—"}`,
     `👔 *Роль:* ${ROLE_LABELS[data.role]}`,
