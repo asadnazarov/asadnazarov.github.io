@@ -15,8 +15,6 @@ export type CompanySize = "solo" | "2-10" | "11-50" | "51-200" | "200-plus";
 
 export type AnnualRevenue = "under-100k" | "100k-500k" | "500k-1m" | "1m-2m" | "over-2m";
 
-export type ProjectBudget = "under-5k" | "5k-10k" | "10k-50k" | "over-50k";
-
 export type Interest =
   | "leads_sales"
   | "customer_support"
@@ -56,7 +54,6 @@ export interface ConsultationFormValues {
   role: Role;
   companySize: CompanySize;
   annualRevenue: AnnualRevenue;
-  projectBudget: ProjectBudget;
   howCanWeHelp: string;
   interests: Interest[];
   additionalInfo?: string;

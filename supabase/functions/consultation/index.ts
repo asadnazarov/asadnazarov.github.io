@@ -11,7 +11,6 @@ const CORS_HEADERS = {
 type Role = "owner" | "executive" | "manager" | "operations" | "technical" | "sales" | "marketing" | "finance" | "other";
 type CompanySize = "solo" | "2-10" | "11-50" | "51-200" | "200-plus";
 type AnnualRevenue = "under-100k" | "100k-500k" | "500k-1m" | "1m-2m" | "over-2m";
-type ProjectBudget = "under-5k" | "5k-10k" | "10k-50k" | "over-50k";
 type Interest = "leads_sales" | "customer_support" | "internal_ops" | "data_reporting" | "content_marketing" | "not_sure";
 
 interface ConsultationPayload {
@@ -23,7 +22,6 @@ interface ConsultationPayload {
   role: Role;
   companySize: CompanySize;
   annualRevenue: AnnualRevenue;
-  projectBudget: ProjectBudget;
   howCanWeHelp: string;
   interests: Interest[];
   additionalInfo?: string;
@@ -35,7 +33,6 @@ const ROLE_VALUES = new Set<Role>([
 ]);
 const COMPANY_SIZE_VALUES = new Set<CompanySize>(["solo", "2-10", "11-50", "51-200", "200-plus"]);
 const REVENUE_VALUES = new Set<AnnualRevenue>(["under-100k", "100k-500k", "500k-1m", "1m-2m", "over-2m"]);
-const BUDGET_VALUES = new Set<ProjectBudget>(["under-5k", "5k-10k", "10k-50k", "over-50k"]);
 const INTEREST_VALUES = new Set<Interest>([
   "leads_sales", "customer_support", "internal_ops", "data_reporting", "content_marketing", "not_sure",
 ]);
@@ -51,9 +48,6 @@ const COMPANY_SIZE_LABELS: Record<CompanySize, string> = {
 const REVENUE_LABELS: Record<AnnualRevenue, string> = {
   "under-100k": "Менее $100 000", "100k-500k": "$100 000–500 000", "500k-1m": "$500 000–1 000 000",
   "1m-2m": "$1–2 млн", "over-2m": "Более $2 млн",
-};
-const BUDGET_LABELS: Record<ProjectBudget, string> = {
-  "under-5k": "$1500 — минимальный требуемый бюджет", "5k-10k": "$5 000–10 000", "10k-50k": "$10 000–50 000", "over-50k": "Более $50 000",
 };
 const INTEREST_LABELS: Record<Interest, string> = {
   leads_sales: "Привлечение клиентов и продажи", customer_support: "Поддержка клиентов",
@@ -98,10 +92,6 @@ function validate(
     typeof data.annualRevenue === "string" ? (data.annualRevenue as AnnualRevenue) : ("" as AnnualRevenue);
   if (!REVENUE_VALUES.has(annualRevenue)) errors.push({ field: "annualRevenue", message: "annualRevenueRequired" });
 
-  const projectBudget =
-    typeof data.projectBudget === "string" ? (data.projectBudget as ProjectBudget) : ("" as ProjectBudget);
-  if (!BUDGET_VALUES.has(projectBudget)) errors.push({ field: "projectBudget", message: "projectBudgetRequired" });
-
   const howCanWeHelp = typeof data.howCanWeHelp === "string" ? data.howCanWeHelp.trim() : "";
   if (howCanWeHelp.length < 10) errors.push({ field: "howCanWeHelp", message: "howCanWeHelpRequired" });
 
@@ -121,7 +111,7 @@ function validate(
     ok: true,
     value: {
       firstName, lastName, email, companyName, companyWebsite, role, companySize,
-      annualRevenue, projectBudget, howCanWeHelp, interests, additionalInfo, locale,
+      annualRevenue, howCanWeHelp, interests, additionalInfo, locale,
     },
   };
 }
@@ -140,7 +130,6 @@ function formatMessage(data: ConsultationPayload) {
     `👔 *Роль:* ${ROLE_LABELS[data.role]}`,
     `👥 *Размер компании:* ${COMPANY_SIZE_LABELS[data.companySize]}`,
     `💵 *Выручка:* ${REVENUE_LABELS[data.annualRevenue]}`,
-    `💰 *Бюджет проекта:* ${BUDGET_LABELS[data.projectBudget]}`,
     `💬 *Чем помочь:* ${data.howCanWeHelp}`,
     `🎯 *Интересует:* ${data.interests.length ? data.interests.map((i) => INTEREST_LABELS[i]).join(", ") : "—"}`,
     `ℹ️ *Доп. информация:* ${data.additionalInfo || "—"}`,

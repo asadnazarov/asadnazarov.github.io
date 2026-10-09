@@ -4,7 +4,6 @@ import type {
   Interest,
   NavItem,
   ProcessStep,
-  ProjectBudget,
   Role,
   SelectOption,
   Testimonial,
@@ -93,8 +92,6 @@ export interface Dictionary {
     companySizeOptions: SelectOption<CompanySize>[];
     annualRevenueLabel: string;
     annualRevenueOptions: SelectOption<AnnualRevenue>[];
-    projectBudgetLabel: string;
-    projectBudgetOptions: SelectOption<ProjectBudget>[];
     howCanWeHelpLabel: string;
     howCanWeHelpPlaceholder: string;
     interestsLabel: string;
@@ -118,7 +115,6 @@ export interface Dictionary {
       roleRequired: string;
       companySizeRequired: string;
       annualRevenueRequired: string;
-      projectBudgetRequired: string;
       howCanWeHelpRequired: string;
       interestsRequired: string;
     };
