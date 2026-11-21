@@ -121,7 +121,7 @@ export function WorldMap() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, ease: EASE }}
-                className="mx-auto max-w-2xl text-center text-white"
+                className="mx-auto mb-10 max-w-2xl text-center text-white md:mb-8"
               >
                 <div className="flex items-end justify-center gap-6 md:gap-10">
                   <div>

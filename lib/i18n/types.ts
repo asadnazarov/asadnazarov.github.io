@@ -21,6 +21,7 @@ export interface Dictionary {
   };
   hero: {
     overline: string;
+    scrollHint: string;
     headline: string;
     headlineAccent: string;
     subhead: string;

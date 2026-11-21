@@ -17,6 +17,7 @@ export const uz: Dictionary = {
   },
   hero: {
     overline: "AI-agentli tizimlar muhandisi",
+    scrollHint: "Pastga suring",
     headline: "Xodimlar sonini oshirmasdan",
     headlineAccent: "masshtablashing.",
     subhead:

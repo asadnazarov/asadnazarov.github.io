@@ -17,6 +17,7 @@ export const ru: Dictionary = {
   },
   hero: {
     overline: "AI-инженер агентных систем",
+    scrollHint: "Листайте",
     headline: "Масштабируйтесь",
     headlineAccent: "без роста штата.",
     subhead:

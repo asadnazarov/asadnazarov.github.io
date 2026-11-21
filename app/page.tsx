@@ -6,6 +6,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Clients } from "@/components/sections/Clients";
 import { About } from "@/components/sections/About";
 import { WorldMap } from "@/components/sections/WorldMap";
+import { ScrollHint } from "@/components/ui/ScrollHint";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <About />
       </main>
       <Footer />
+      <ScrollHint />
     </>
   );
 }
