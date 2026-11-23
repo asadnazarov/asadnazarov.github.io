@@ -12,7 +12,7 @@ export const CLIENTS: Client[] = [
   { src: "/images/clients/avtotest7.jpg", name: "AVTOTEST7", country: "UZ" },
   { src: "/images/clients/donzar.png", name: "DONZAR", country: "UZ" },
   { src: "/images/clients/easy-tag.jpg", name: "EASY TAG", country: "GB" },
-  { src: "/images/clients/ecorom.jpg", name: "ECOROM", country: "UZ" },
+  { src: "/images/clients/ecorom.jpg", name: "ECO ROM", country: "UZ" },
   { src: "/images/clients/enjen-digital.png", name: "ENJEN DIGITAL", country: "US" },
   { src: "/images/clients/global-exam.jpg", name: "GLOBAL EXAM", country: "UZ" },
   { src: "/images/clients/nbuild-group.png", name: "NBUILD GROUP", country: "UZ" },
