@@ -2,7 +2,7 @@ export const SITE_NAME = "Asad Nazarov";
 export const SITE_URL = "https://asadnazarov-ai.uz";
 
 export const SOCIALS = {
-  telegram: "https://t.me/+sYvEnKnzLb03MGU6",
+  telegram: "https://t.me/asadnazarov_ai",
   instagram: "https://www.instagram.com/asadnazarov_ai/",
 };
 
